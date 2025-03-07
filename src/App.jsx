@@ -20,6 +20,7 @@ function App() {
       : "linear-gradient(rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 0.8)), url(/images/noragoLogoFondo.jpg)";
     document.body.style.backgroundSize = "60px";
     document.body.style.backgroundRepeat = "repeat";
+    document.body.style.backgroundAttachment = "fixed";
   }, [darkMode]);
 
   return (

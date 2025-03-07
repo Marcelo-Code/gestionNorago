@@ -5,12 +5,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import HomeIcon from "@mui/icons-material/Home";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import BuildIcon from "@mui/icons-material/Build";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { green } from "@mui/material/colors";
 
 const ClientsList = (clientsListProps) => {
   const {
@@ -62,12 +64,29 @@ const ClientsList = (clientsListProps) => {
               {client.name} {client.last_name}
             </div>
             <div className="clientPhone">
-              <PhoneIphoneIcon />
-              {client.phone}
+              <WhatsAppIcon sx={{ color: green[500] }} />
+              {/* {client.phone} */}
+              <Link
+                href={`https://wa.me/${client.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: darkMode ? "white" : darkColor }}
+              >
+                {client.phone}
+              </Link>
             </div>
-            <div className="clientAddress">
-              <HomeIcon />
-              {client.address}
+            <div>
+              <LocationOnIcon />
+              <Link
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  client.address
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: darkMode ? "white" : darkColor }}
+              >
+                {client.address}
+              </Link>
             </div>
             <div className="clientEmail">
               <AlternateEmailIcon />
@@ -123,7 +142,6 @@ const ClientsList = (clientsListProps) => {
         variant="outlined"
         sx={{
           color: darkMode ? "white" : "#1976d2",
-          borderColor: darkMode ? "white" : "#1976d2",
           backgroundColor: darkMode ? darkColor : "white",
           maxWidth: "600px",
           width: "80%",

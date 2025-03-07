@@ -118,7 +118,6 @@ export const ServicesList = (servicesListProps) => {
         variant="outlined"
         sx={{
           color: darkMode ? "white" : "#1976d2",
-          borderColor: darkMode ? "white" : "#1976d2",
           backgroundColor: darkMode ? darkColor : "white",
           maxWidth: "600px",
           width: "80%",
