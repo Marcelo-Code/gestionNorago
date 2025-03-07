@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "horndon";
+  src: url(/fonts/horndonBeckerRegular.ttf);
+}
+
+.homeContainer {
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url(/images/noragoLogoHead.png) no-repeat center;
+}
+
+.homeContainer::after {
+  content: "Home"; /* El texto que quieres */
+  margin-top: 220px;
+  font-family: "horndon";
+  color: rgba(24, 70, 102, 1);
+  font-size: 3em;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.homeTitle {
+  text-align: center;
+  font-family: "horndon";
+  color: rgba(24, 70, 102, 1);
+  font-size: 3em;
+  letter-spacing: 5px;
+}

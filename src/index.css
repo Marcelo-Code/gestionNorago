@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* background-image: url("/images/noragoLogoFondo.jpg"); */
+  /* background: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    url("/images/noragoLogoFondo.jpg"); */
+  background-repeat: repeat;
+  background-size: cover;
+  width: 100vw;
+}
