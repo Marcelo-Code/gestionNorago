@@ -66,18 +66,18 @@ const ClientsList = (clientsListProps) => {
             <div className="clientPhone">
               <WhatsAppIcon sx={{ color: green[500] }} />
               {/* {client.phone} */}
-              <Link
+              <a
                 href={`https://wa.me/${client.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: darkMode ? "white" : darkColor }}
               >
                 {client.phone}
-              </Link>
+              </a>
             </div>
             <div>
               <LocationOnIcon />
-              <Link
+              <a
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                   client.address
                 )}`}
@@ -86,7 +86,7 @@ const ClientsList = (clientsListProps) => {
                 style={{ color: darkMode ? "white" : darkColor }}
               >
                 {client.address}
-              </Link>
+              </a>
             </div>
             <div className="clientEmail">
               <AlternateEmailIcon />
