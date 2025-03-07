@@ -1,6 +1,6 @@
 import React from "react";
 import "./ClientsList.css";
-import { SwitchEditionMode } from "../../../layout/switchEditionMode/switchEditionMode";
+import { SwitchEditionMode } from "../../../layout/switchEditionMode/SwitchEditionMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
