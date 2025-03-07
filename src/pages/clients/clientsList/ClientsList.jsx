@@ -76,7 +76,7 @@ const ClientsList = (clientsListProps) => {
               </a>
             </div>
             <div>
-              <LocationOnIcon />
+              <LocationOnIcon sx={{ color: "red" }} />
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                   client.address
@@ -90,7 +90,10 @@ const ClientsList = (clientsListProps) => {
             </div>
             <div className="clientEmail">
               <AlternateEmailIcon />
-              <a href={`mailto:${client.email}`} className="clientEmail">
+              <a
+                href={`mailto:${client.email}`}
+                style={{ color: darkMode ? "white" : darkColor }}
+              >
                 {client.email}
               </a>
             </div>
