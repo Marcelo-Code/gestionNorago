@@ -1,6 +1,6 @@
 import React from "react";
 import "./servicesList.css";
-import { SwitchEditionMode } from "../../../layout/switchEditionMode/switchEditionMode";
+import { SwitchEditionMode } from "../../../layout/switchEditionMode/SwitchEditionMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
