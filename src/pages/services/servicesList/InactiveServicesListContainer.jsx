@@ -1,35 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./ClientsList.css";
-import ClientsList from "./ClientsList";
 import {
-  deleteClient,
-  getClients,
-  softDeleteClient,
-} from "../../../services/api/clients";
+  getServices,
+  softUndeleteService,
+} from "../../../services/api/services";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor } from "../../../utils/helpers";
-import { ErrorContainer } from "../../../layout/error/ErrorContainer";
 import { useNavigate } from "react-router-dom";
+import { InactiveServicesList } from "./InactiveServicesList";
 
-export const ClientsListContainer = () => {
-  const [editMode, setEditMode] = useState(false);
-  const [clients, setClients] = useState([]);
+export const InactiveServicesListContainer = () => {
+  const [inactiveServices, setInactiveServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [updateList, setUpdateList] = useState(false);
-  const navigate = useNavigate();
-
   const { darkMode } = useContext(GeneralContext);
-  const handleEditModeChange = (e) => {
-    setEditMode(e.target.checked);
-  };
+  const navigate = useNavigate();
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const handleDeleteClient = (clientId) => {
-    softDeleteClient(clientId)
+  const handleUndeleteService = (clientId) => {
+    softUndeleteService(clientId)
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
@@ -41,30 +33,25 @@ export const ClientsListContainer = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getClients()
+    getServices()
       .then((response) => {
         console.log(response);
-        response.data = response.data.filter((client) => client.active);
-        setClients(response.data);
+        response.data = response.data.filter((service) => !service.active);
+        setInactiveServices(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-        return <ErrorContainer />;
-      })
+      .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
   }, [updateList]);
 
   if (isLoading) return <LoadingContainer />;
 
-  const clientsListProps = {
-    clients,
-    handleEditModeChange,
-    editMode,
-    handleDeleteClient,
+  const inactiveServicesListProps = {
+    inactiveServices,
+    handleUndeleteService,
     darkMode,
     darkColor,
     handleGoBack,
   };
 
-  return <ClientsList {...clientsListProps} />;
+  return <InactiveServicesList {...inactiveServicesListProps} />;
 };

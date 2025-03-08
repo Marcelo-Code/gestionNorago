@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "horndon";
+  src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
+}
+
+.notFoundTitle {
+  margin: 100px;
+}
+
+.inactiveClientsListContainer {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100%;
+  min-height: 80vh;
+}
+
+.inactiveClientsListTitle {
+  font-family: "horndon";
+  font-size: 2.5em;
+  text-shadow: 0 0 20px white;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  letter-spacing: 3px;
+}
+
+.inactiveClientsList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.inactiveClientItem {
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+
+  gap: 15px;
+  max-width: 600px;
+  width: 80%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
+}
+
+.inactiveClientName {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.inactiveClientEmail {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.inactiveClientPhone {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  text-decoration: none;
+}
+
+.inactiveClientAddress {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.inactiveClientServiceButton {
+  grid-column: 1/3;
+  grid-row: 3/4;
+}
+
+.inactiveClientListActions {
+  grid-column: 1/3;
+  grid-row: 3/4;
+}
+
+.inactiveClientItem div {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espacio entre ícono y texto */
+}
+
+.inactiveClientListActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .inactiveClientItem {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+  }
+
+  .inactiveClienteName {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .inactiveClientEmail {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+
+  .inactiveClientPhone {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+
+  .inactiveClientAddress {
+    grid-column: 1/2;
+    grid-row: 4/5;
+  }
+
+  .inactiveClientServiceButton {
+    grid-column: 1/2;
+    grid-row: 5/6;
+  }
+
+  .inactiveClientListActions {
+    grid-column: 1/2;
+    grid-row: 5/6;
+  }
+}

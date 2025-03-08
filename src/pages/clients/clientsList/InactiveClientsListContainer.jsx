@@ -1,35 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./ClientsList.css";
-import ClientsList from "./ClientsList";
-import {
-  deleteClient,
-  getClients,
-  softDeleteClient,
-} from "../../../services/api/clients";
+import { getClients, softUndeleteClient } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor } from "../../../utils/helpers";
 import { ErrorContainer } from "../../../layout/error/ErrorContainer";
 import { useNavigate } from "react-router-dom";
+import { InactiveClientsList } from "./InactiveClientsList";
 
-export const ClientsListContainer = () => {
-  const [editMode, setEditMode] = useState(false);
-  const [clients, setClients] = useState([]);
+export const InactiveClientsListContainer = () => {
+  const [inactiveClients, setInactiveClients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [updateList, setUpdateList] = useState(false);
   const navigate = useNavigate();
 
   const { darkMode } = useContext(GeneralContext);
-  const handleEditModeChange = (e) => {
-    setEditMode(e.target.checked);
-  };
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const handleDeleteClient = (clientId) => {
-    softDeleteClient(clientId)
+  const handleUndeleteClient = (clientId) => {
+    softUndeleteClient(clientId)
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
@@ -44,8 +35,8 @@ export const ClientsListContainer = () => {
     getClients()
       .then((response) => {
         console.log(response);
-        response.data = response.data.filter((client) => client.active);
-        setClients(response.data);
+        response.data = response.data.filter((client) => !client.active);
+        setInactiveClients(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -57,14 +48,12 @@ export const ClientsListContainer = () => {
   if (isLoading) return <LoadingContainer />;
 
   const clientsListProps = {
-    clients,
-    handleEditModeChange,
-    editMode,
-    handleDeleteClient,
+    inactiveClients,
     darkMode,
     darkColor,
     handleGoBack,
+    handleUndeleteClient,
   };
 
-  return <ClientsList {...clientsListProps} />;
+  return <InactiveClientsList {...clientsListProps} />;
 };

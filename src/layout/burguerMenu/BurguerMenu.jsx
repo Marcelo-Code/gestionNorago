@@ -35,6 +35,18 @@ export const BurguerMenu = (burguerMenuProps) => {
               <BuildIcon /> Servicios
             </li>
           </Link>
+          <Link to={"/clients/inactiveClientsList"} onClick={closeMenu}>
+            <li className="bm-item">
+              {" "}
+              <PersonIcon /> Clientes Inactivos
+            </li>
+          </Link>
+          <Link to={"/services/inactiveServicesList"} onClick={closeMenu}>
+            <li className="bm-item">
+              {" "}
+              <BuildIcon /> Servicios Inactivos
+            </li>
+          </Link>
         </ul>
       </div>
     </Menu>

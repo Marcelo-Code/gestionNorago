@@ -11,6 +11,8 @@ import { ServiceCreationContainer } from "./pages/services/serviceCreation/Servi
 import { ServiceModificationContainer } from "./pages/services/serviceModification/ServiceModificationContainer";
 import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
+import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
+import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -30,6 +32,10 @@ function App() {
         <Route path="/" element={<HomeContainer />} />
         <Route path="/clients/clientsList" element={<ClientsListContainer />} />
         <Route
+          path="/clients/inactiveClientsList"
+          element={<InactiveClientsListContainer />}
+        />
+        <Route
           path="/clients/clientCreation"
           element={<ClientCreationContainer />}
         />
@@ -44,6 +50,10 @@ function App() {
         <Route
           path="/services/servicesList/:clientId"
           element={<ServicesListContainer />}
+        />
+        <Route
+          path="/services/inactiveServicesList"
+          element={<InactiveServicesListContainer />}
         />
         <Route
           path="/services/serviceCreation"

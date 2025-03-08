@@ -1,0 +1,166 @@
+@font-face {
+  font-family: "horndon";
+  src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
+}
+
+.inactiveServicesListContainer {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100%;
+  min-height: 80vh;
+}
+
+.inactiveServicesListTitle {
+  font-family: "horndon";
+  font-size: 2.5em;
+  color: steelblue;
+  text-shadow: 0 0 20px white;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  letter-spacing: 3px;
+}
+
+.inactiveServicesList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.inactiveServiceItem {
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+  gap: 15px;
+  max-width: 1000px;
+  width: 80%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.inactiveServiceClientName {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.inactiveServiceDate {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.inactiveServiceDevice {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.inactiveServiceSerialNumber {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.inactiveServiceText {
+  grid-column: 1/3;
+  grid-row: 3/4;
+}
+
+.inactiveServiceInputs {
+  grid-column: 1/3;
+  grid-row: 4/5;
+}
+
+.inactiveServiceInputsPrice {
+  grid-column: 1/2;
+  grid-row: 5/6;
+}
+
+.inactiveServiceTotalPrice {
+  grid-column: 2/3;
+  grid-row: 5/6;
+}
+
+.inactiveServicesListActions {
+  grid-column: 1/3;
+  grid-row: 6/7;
+}
+
+@media (max-width: 800px) {
+  .inactiveServiceItem {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    text-align: center;
+  }
+
+  .inactiveServiceClientName {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .inactiveServiceDate {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+
+  .inactiveServiceDevice {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+
+  .inactiveServiceSerialNumber {
+    grid-column: 1/2;
+    grid-row: 4/5;
+  }
+
+  .inactiveServiceText {
+    grid-column: 1/2;
+    grid-row: 5/6;
+  }
+
+  .inactiveServiceInputs {
+    grid-column: 1/2;
+    grid-row: 6/7;
+  }
+
+  .inactiveServiceInputsPrice {
+    grid-column: 1/2;
+    grid-row: 7/8;
+  }
+
+  .inactiveServiceTotalPrice {
+    grid-column: 1/2;
+    grid-row: 8/9;
+  }
+
+  .inactiveServicesListActions {
+    grid-column: 1/2;
+    grid-row: 9/10;
+  }
+}
+
+.inactiveServiceItem div {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espacio entre ícono y texto */
+}
+
+.inactiveServiceClientEmail {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.inactiveServiceClientEmail:hover {
+  text-decoration: underline;
+}
+
+.inactiveServicesListActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

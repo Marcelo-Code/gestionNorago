@@ -78,6 +78,56 @@ export const deleteClient = async (clientId) => {
   };
 };
 
+export const softDeleteClient = async (clientId) => {
+  const confirmed = await confirmationAlert(
+    "¿Estás seguro de que deseas eliminar este cliente?"
+  );
+
+  if (confirmed) {
+    try {
+      await supabaseClient
+        .from("clients")
+        .update({ active: false })
+        .eq("id", clientId);
+
+      successAlert("Cliente eliminado con éxito");
+      return { status: 200, message: "Cliente eliminado con éxito" };
+    } catch (error) {
+      errorAlert("Error al eliminar el cliente");
+      return {
+        status: 500,
+        message: "Error al aliminar el cliente",
+        error: error.message,
+      };
+    }
+  }
+};
+
+export const softUndeleteClient = async (clientId) => {
+  const confirmed = await confirmationAlert(
+    "¿Estás seguro de que deseas restaurar este cliente?"
+  );
+
+  if (confirmed) {
+    try {
+      await supabaseClient
+        .from("clients")
+        .update({ active: true })
+        .eq("id", clientId);
+
+      successAlert("Cliente restaurado con éxito");
+      return { status: 200, message: "Cliente restaurado con éxito" };
+    } catch (error) {
+      errorAlert("Error al restaurar el cliente");
+      return {
+        status: 500,
+        message: "Error al restaurar el cliente",
+        error: error.message,
+      };
+    }
+  }
+};
+
 export const updateClient = async (clientId, updatedClient) => {
   const confirmed = await confirmationAlert(
     "¿Estás seguro de que deseas actualizar este cliente?"

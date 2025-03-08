@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ServicesList } from "./ServicesList";
-import { deleteService, getServices } from "../../../services/api/services";
+import { getServices, softDeleteService } from "../../../services/api/services";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor } from "../../../utils/helpers";
@@ -24,7 +24,7 @@ export const ServicesListContainer = () => {
   };
 
   const handleDeleteService = (clientId) => {
-    deleteService(clientId)
+    softDeleteService(clientId)
       .then((response) => {
         if (response.status === 200) {
           console.log(response);
@@ -39,6 +39,7 @@ export const ServicesListContainer = () => {
     getServices()
       .then((response) => {
         console.log(response);
+        response.data = response.data.filter((service) => service.active);
         if (clientId)
           response.data = response.data.filter(
             (service) => service.client_id === parseInt(clientId)

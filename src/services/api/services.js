@@ -81,6 +81,56 @@ export const deleteService = async (serviceId) => {
   };
 };
 
+export const softDeleteService = async (serviceId) => {
+  const confirmed = await confirmationAlert(
+    "¿Estás seguro de que deseas eliminar este servicio?"
+  );
+
+  if (confirmed) {
+    try {
+      await supabaseClient
+        .from("services")
+        .update({ active: false })
+        .eq("id", serviceId);
+
+      successAlert("Servicio eliminado con éxito");
+      return { status: 200, message: "Servicio eliminado con éxito" };
+    } catch (error) {
+      errorAlert("Error al eliminar el servicio");
+      return {
+        status: 500,
+        message: "Error al aliminar el servicio",
+        error: error.message,
+      };
+    }
+  }
+};
+
+export const softUndeleteService = async (serviceId) => {
+  const confirmed = await confirmationAlert(
+    "¿Estás seguro de que deseas restaurar este servicio?"
+  );
+
+  if (confirmed) {
+    try {
+      await supabaseClient
+        .from("services")
+        .update({ active: true })
+        .eq("id", serviceId);
+
+      successAlert("Servicio restaurado con éxito");
+      return { status: 200, message: "Servicio restaurado con éxito" };
+    } catch (error) {
+      errorAlert("Error al restaurar el servicio");
+      return {
+        status: 500,
+        message: "Error al restaurar el servicio",
+        error: error.message,
+      };
+    }
+  }
+};
+
 export const updateService = async (serviceId, updatedService) => {
   const confirmed = await confirmationAlert(
     "¿Estás seguro de que deseas actualizar este servicio?"
