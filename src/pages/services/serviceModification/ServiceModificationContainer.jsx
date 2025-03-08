@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ServiceModification } from "./ServiceModification";
 import { getService, updateService } from "../../../services/api/services";
 import { getClients } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
+import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
+import { GeneralContext } from "../../../context/GeneralContext";
 
 export const ServiceModificationContainer = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,7 @@ export const ServiceModificationContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [modifiedFlag, setModifiedFlag] = useState(false);
   const [clients, setClients] = useState([]);
+  const { darkMode } = useContext(GeneralContext);
 
   const handleUpdateService = (serviceId, formData) => {
     updateService(serviceId, formData)
@@ -77,6 +80,10 @@ export const ServiceModificationContainer = () => {
     formData,
     handleUpdateService,
     modifiedFlag,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   };
 
   return <ServiceModification {...serviceModificationProps} />;

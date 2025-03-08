@@ -19,11 +19,20 @@ export const ServiceCreation = (serviceCreationProps) => {
     handleGoBack,
     clients,
     isLoading,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   } = serviceCreationProps;
 
   return (
     <div className="clientCreationContainer">
-      <h5 className="clientCreationTitle">Nuevo Servicio</h5>
+      <h5
+        className="clientCreationTitle"
+        style={{ color: darkMode ? "white" : buttonColor }}
+      >
+        Nuevo Servicio
+      </h5>
       <Box
         sx={{
           display: "flex",
@@ -31,7 +40,13 @@ export const ServiceCreation = (serviceCreationProps) => {
           p: 2,
         }}
       >
-        <Card sx={{ maxWidth: 600, width: "100%" }}>
+        <Card
+          sx={{
+            maxWidth: 600,
+            width: "100%",
+            backgroundColor: darkMode ? lightColor : "white",
+          }}
+        >
           <CardContent>
             <Box display="flex" flexDirection="column" gap={2}>
               <ClientSelect
@@ -44,7 +59,7 @@ export const ServiceCreation = (serviceCreationProps) => {
                 //  error={/* tu lógica de error */}
                 //  helperText={/* tu mensaje de error o ayuda */}
               />
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Fecha"
@@ -59,7 +74,7 @@ export const ServiceCreation = (serviceCreationProps) => {
                   }}
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Equipo"
@@ -71,7 +86,7 @@ export const ServiceCreation = (serviceCreationProps) => {
                   type="text"
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Nro Serie"
@@ -83,7 +98,7 @@ export const ServiceCreation = (serviceCreationProps) => {
                   type="text"
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Servicio"
@@ -98,7 +113,7 @@ export const ServiceCreation = (serviceCreationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Repuestos"
@@ -123,7 +138,7 @@ export const ServiceCreation = (serviceCreationProps) => {
               >
                 <AttachMoneyIcon />
                 <TextField
-                  sx={{ flex: 1 }}
+                  sx={{ flex: 1, backgroundColor: "white" }}
                   label="Precio Repuestos"
                   name="inputs_price"
                   value={formData.inputs_price}
@@ -146,7 +161,7 @@ export const ServiceCreation = (serviceCreationProps) => {
               >
                 <AttachMoneyIcon />
                 <TextField
-                  sx={{ flex: 1 }}
+                  sx={{ flex: 1, backgroundColor: "white" }}
                   label="Precio Servicio"
                   name="total_price"
                   value={formData.total_price}
@@ -184,7 +199,12 @@ export const ServiceCreation = (serviceCreationProps) => {
                     variant="outlined"
                     size="large"
                     sx={{
-                      width: { xs: "100%", sm: "48%" },
+                      width: {
+                        xs: "100%",
+                        sm: "48%",
+                        borderColor: darkMode ? "white" : buttonColor,
+                        color: darkMode ? "white" : buttonColor,
+                      },
                     }}
                     onClick={() => handleGoBack()}
                   >

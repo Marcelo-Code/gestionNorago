@@ -18,7 +18,6 @@ export const InactiveClientsListContainer = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
-
   const handleUndeleteClient = (clientId) => {
     softUndeleteClient(clientId)
       .then((response) => {

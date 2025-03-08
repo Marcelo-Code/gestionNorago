@@ -37,13 +37,13 @@ export const InactiveClientsList = (clientsListProps) => {
           <div
             key={inactiveClient.id}
             style={{ backgroundColor: darkMode ? darkColor : "white" }}
-            className="inactiveClientItem"
+            className="inactiveClientsItem"
           >
-            <div className="inactiveClientName">
+            <div className="inactiveClientsName">
               <PersonIcon />
               {inactiveClient.name} {inactiveClient.last_name}
             </div>
-            <div className="inactiveClientPhone">
+            <div className="inactiveClientsPhone">
               <WhatsAppIcon sx={{ color: green[500] }} />
               {/* {client.phone} */}
               <a
@@ -68,7 +68,7 @@ export const InactiveClientsList = (clientsListProps) => {
                 {inactiveClient.address}
               </a>
             </div>
-            <div className="inactiveClientEmail">
+            <div className="inactiveClientsEmail">
               <AlternateEmailIcon />
               <a
                 href={`mailto:${inactiveClient.email}`}
@@ -77,7 +77,7 @@ export const InactiveClientsList = (clientsListProps) => {
                 {inactiveClient.email}
               </a>
             </div>
-            <div className="inactiveClientListActions">
+            <div className="inactiveClientsListActions">
               <Link onClick={() => handleUndeleteClient(inactiveClient.id)}>
                 <RestoreFromTrashIcon
                   sx={{

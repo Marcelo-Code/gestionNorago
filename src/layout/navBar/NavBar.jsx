@@ -14,12 +14,21 @@ export const NavBar = (navBarProps) => {
     >
       <BurguerMenuContainer />
       <Link to={"/"} className="navbar-brand">
-        <img
-          src="/images/noragoLogo.png"
-          width={100}
-          alt="Logo"
-          className="navbar-logo"
-        />
+        {darkMode ? (
+          <img
+            src="/images/noragoLightLogo.png"
+            width={100}
+            alt="Logo"
+            className="navbar-logo"
+          />
+        ) : (
+          <img
+            src="/images/noragoLogo.png"
+            width={100}
+            alt="Logo"
+            className="navbar-logo"
+          />
+        )}
       </Link>
       <SwitchDarkMode checked={darkMode} onChange={changeMode} />
     </nav>

@@ -22,11 +22,20 @@ export const ServiceModification = (serviceModificationProps) => {
     formData,
     handleUpdateService,
     modifiedFlag,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   } = serviceModificationProps;
 
   return (
     <div className="serviceModificationContainer">
-      <h5 className="serviceModificationTitle">Modificar Servicio</h5>
+      <h5
+        className="serviceModificationTitle"
+        style={{ color: darkMode ? "white" : buttonColor }}
+      >
+        Modificar Servicio
+      </h5>
       <Box
         sx={{
           display: "flex",
@@ -34,7 +43,13 @@ export const ServiceModification = (serviceModificationProps) => {
           p: 2,
         }}
       >
-        <Card sx={{ maxWidth: 600, width: "100%" }}>
+        <Card
+          sx={{
+            maxWidth: 600,
+            width: "100%",
+            backgroundColor: darkMode ? lightColor : "white",
+          }}
+        >
           <CardContent>
             <Box display="flex" flexDirection="column" gap={2}>
               <ClientSelect
@@ -47,7 +62,7 @@ export const ServiceModification = (serviceModificationProps) => {
                 //  error={/* tu lógica de error */}
                 //  helperText={/* tu mensaje de error o ayuda */}
               />
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Fecha"
@@ -62,7 +77,7 @@ export const ServiceModification = (serviceModificationProps) => {
                   }}
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Equipo"
@@ -74,7 +89,7 @@ export const ServiceModification = (serviceModificationProps) => {
                   type="text"
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Nro Serie"
@@ -86,7 +101,7 @@ export const ServiceModification = (serviceModificationProps) => {
                   type="text"
                 />
               </Box>
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Servicio"
@@ -101,7 +116,7 @@ export const ServiceModification = (serviceModificationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Repuestos"
@@ -126,7 +141,7 @@ export const ServiceModification = (serviceModificationProps) => {
               >
                 <AttachMoneyIcon />
                 <TextField
-                  sx={{ flex: 1 }}
+                  sx={{ flex: 1, backgroundColor: "white" }}
                   label="Precio Repuestos"
                   name="inputs_price"
                   value={formData.inputs_price}
@@ -149,7 +164,7 @@ export const ServiceModification = (serviceModificationProps) => {
               >
                 <AttachMoneyIcon />
                 <TextField
-                  sx={{ flex: 1 }}
+                  sx={{ flex: 1, backgroundColor: "white" }}
                   label="Precio Servicio"
                   name="total_price"
                   value={formData.total_price}
@@ -188,7 +203,12 @@ export const ServiceModification = (serviceModificationProps) => {
                     variant="outlined"
                     size="large"
                     sx={{
-                      width: { xs: "100%", sm: "48%" },
+                      width: {
+                        xs: "100%",
+                        sm: "48%",
+                        borderColor: darkMode ? "white" : buttonColor,
+                        color: darkMode ? "white" : buttonColor,
+                      },
                     }}
                     onClick={() => handleGoBack()}
                   >

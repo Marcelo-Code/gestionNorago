@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "horndon";
+  src: url(/fonts/horndonBeckerRegular.ttf);
+}
+
+.accordionItem {
+  display: block;
+
+  /* Added by me */
+  color: white;
+  font-size: 1.7em;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "horndon";
+  padding-bottom: 10px;
+}
+
+.accordionTitle {
+  color: white;
+  font-size: 1.8em;
+  font-family: "horndon";
+  text-decoration: none;
+}
+
+.accordionTitle:hover,
+.accordionItem:hover {
+  color: gray;
+}

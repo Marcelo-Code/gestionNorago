@@ -42,6 +42,7 @@ export function ClientSelect({
           required={required}
           error={error}
           helperText={helperText}
+          sx={{ backgroundColor: "white" }}
         />
       )}
     />

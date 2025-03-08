@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ClientModification } from "./ClientModification";
 import { useNavigate, useParams } from "react-router-dom";
 import { getClient, updateClient } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
+import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
+import { GeneralContext } from "../../../context/GeneralContext";
 
 export const ClientModificactionContainer = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ export const ClientModificactionContainer = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [modifiedFlag, setModifiedFlag] = useState(false);
+  const { darkMode } = useContext(GeneralContext);
 
   const { clientId } = useParams();
   const navigate = useNavigate();
@@ -62,6 +65,10 @@ export const ClientModificactionContainer = () => {
     handleGoBack,
     clientId,
     modifiedFlag,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   };
   return <ClientModification {...clientModificationProps} />;
 };

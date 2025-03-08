@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import "./burguerMenu.css";
 import PersonIcon from "@mui/icons-material/Person";
 import BuildIcon from "@mui/icons-material/Build";
-import { Build } from "@mui/icons-material";
 import { darkColor, lightColor } from "../../utils/helpers";
+import AccordionMenuContainer from "../accordionMenu/AccordionMenu";
 export const BurguerMenu = (burguerMenuProps) => {
   const { closeMenu, menuOpen, handleStateChange, darkMode } = burguerMenuProps;
+  const accordionProps = { closeMenu, darkColor, lightColor, darkMode };
   return (
     <Menu
       isOpen={menuOpen}
@@ -35,18 +36,9 @@ export const BurguerMenu = (burguerMenuProps) => {
               <BuildIcon /> Servicios
             </li>
           </Link>
-          <Link to={"/clients/inactiveClientsList"} onClick={closeMenu}>
-            <li className="bm-item">
-              {" "}
-              <PersonIcon /> Clientes Inactivos
-            </li>
-          </Link>
-          <Link to={"/services/inactiveServicesList"} onClick={closeMenu}>
-            <li className="bm-item">
-              {" "}
-              <BuildIcon /> Servicios Inactivos
-            </li>
-          </Link>
+          <div style={{ marginTop: "80px" }}>
+            <AccordionMenuContainer {...accordionProps} />
+          </div>
         </ul>
       </div>
     </Menu>

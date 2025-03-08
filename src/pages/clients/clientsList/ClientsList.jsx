@@ -37,7 +37,7 @@ const ClientsList = (clientsListProps) => {
       </h2>
       <div
         style={{ backgroundColor: darkMode ? darkColor : "white" }}
-        className="clientListEditionBar"
+        className="clientsListEditionBar"
       >
         <span style={{ marginLeft: "5vw" }}>EDICIÓN</span>
         <SwitchEditionMode onChange={handleEditModeChange} checked={editMode} />
@@ -57,13 +57,13 @@ const ClientsList = (clientsListProps) => {
           <div
             key={client.id}
             style={{ backgroundColor: darkMode ? darkColor : "white" }}
-            className="clientItem"
+            className="clientsItem"
           >
-            <div className="clientName">
+            <div className="clientsName">
               <PersonIcon />
               {client.name} {client.last_name}
             </div>
-            <div className="clientPhone">
+            <div className="clientsPhone">
               <WhatsAppIcon sx={{ color: green[500] }} />
               {/* {client.phone} */}
               <a
@@ -88,7 +88,7 @@ const ClientsList = (clientsListProps) => {
                 {client.address}
               </a>
             </div>
-            <div className="clientEmail">
+            <div className="clientsEmail">
               <AlternateEmailIcon />
               <a
                 href={`mailto:${client.email}`}
@@ -98,7 +98,7 @@ const ClientsList = (clientsListProps) => {
               </a>
             </div>
             {!editMode ? (
-              <div className="clientServiceButton">
+              <div className="clientsServiceButton">
                 <Link
                   to={`/services/servicesList/${client.id}`}
                   style={{ width: "100%" }}
@@ -117,7 +117,7 @@ const ClientsList = (clientsListProps) => {
                 </Link>
               </div>
             ) : (
-              <div className="clientListActions">
+              <div className="clientsListActions">
                 <Link onClick={() => handleDeleteClient(client.id)}>
                   <DeleteIcon
                     sx={{

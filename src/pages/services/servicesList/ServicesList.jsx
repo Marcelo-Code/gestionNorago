@@ -55,37 +55,49 @@ export const ServicesList = (servicesListProps) => {
           <div
             key={service.id}
             style={{ backgroundColor: darkMode ? darkColor : "white" }}
-            className="serviceItem"
+            className="servicesItem"
           >
-            <div className="clientName" style={{ marginBottom: "10px" }}>
+            <div
+              className="servicesClientName"
+              style={{ marginBottom: "10px" }}
+            >
               <b style={textShadow}>CLIENTE:</b>
               {service.clients.name} {service.clients.last_name}
             </div>
-            <div className="serviceDate" style={{ marginBottom: "10px" }}>
+            <div className="servicesDate" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>FECHA: </b>
               {dateFormat(service.date)}
             </div>
-            <div className="device" style={{ marginBottom: "10px" }}>
+            <div className="servicesDevice" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>EQUIPO REPARADO:</b>
               {service.device}
             </div>
-            <div className="serviceText" style={{ marginBottom: "10px" }}>
+            <div className="servicesText" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>DETALLE SERVICIO: </b>
               {service.service_text}
             </div>
-            <div className="inputs" style={{ marginBottom: "10px" }}>
+            <div className="servicesInputs" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>REPUESTOS UTILIZADOS:</b>
               {service.inputs}
             </div>
-            <div className="serialNumber" style={{ marginBottom: "10px" }}>
+            <div
+              className="servicesSerialNumber"
+              style={{ marginBottom: "10px" }}
+            >
               <b style={textShadow}>N° SERIE:</b>
               {service.serial_number}
             </div>
-            <div className="inputsPrice" style={{ marginBottom: "10px" }}>
+            <div
+              className="servicesInputsPrice"
+              style={{ marginBottom: "10px" }}
+            >
               <b style={textShadow}>PRECIO REPUESTOS: </b>
               {currencyFormat(service.inputs_price)}
             </div>
-            <div className="totalPrice" style={{ marginBottom: "10px" }}>
+            <div
+              className="servicesTotalPrice"
+              style={{ marginBottom: "10px" }}
+            >
               <b style={textShadow}>TOTAL SERVICIO:</b>
               {currencyFormat(service.total_price)}
             </div>

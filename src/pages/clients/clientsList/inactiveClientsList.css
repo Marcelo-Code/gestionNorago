@@ -32,7 +32,7 @@
   flex-wrap: wrap;
 }
 
-.inactiveClientItem {
+.inactiveClientsItem {
   margin: 10px;
   padding: 10px;
   border-bottom: 1px solid #eee;
@@ -50,81 +50,81 @@
   grid-template-rows: auto auto auto auto;
 }
 
-.inactiveClientName {
+.inactiveClientsName {
   grid-column: 1/2;
   grid-row: 1/2;
 }
 
-.inactiveClientEmail {
+.inactiveClientsEmail {
   grid-column: 2/3;
   grid-row: 1/2;
 }
 
-.inactiveClientPhone {
+.inactiveClientsPhone {
   grid-column: 1/2;
   grid-row: 2/3;
   text-decoration: none;
 }
 
-.inactiveClientAddress {
+.inactiveClientsAddress {
   grid-column: 2/3;
   grid-row: 2/3;
 }
 
-.inactiveClientServiceButton {
+.inactiveClientsServiceButton {
   grid-column: 1/3;
   grid-row: 3/4;
 }
 
-.inactiveClientListActions {
+.inactiveClientsListActions {
   grid-column: 1/3;
   grid-row: 3/4;
 }
 
-.inactiveClientItem div {
+.inactiveClientsItem div {
   display: flex;
   align-items: center;
   gap: 5px; /* Espacio entre ícono y texto */
 }
 
-.inactiveClientListActions {
+.inactiveClientsListActions {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 @media (max-width: 700px) {
-  .inactiveClientItem {
+  .inactiveClientsItem {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto auto auto;
   }
 
-  .inactiveClienteName {
+  .inactiveClientsName {
     grid-column: 1/2;
     grid-row: 1/2;
   }
 
-  .inactiveClientEmail {
+  .inactiveClientsEmail {
     grid-column: 1/2;
     grid-row: 2/3;
   }
 
-  .inactiveClientPhone {
+  .inactiveClientsPhone {
     grid-column: 1/2;
     grid-row: 3/4;
   }
 
-  .inactiveClientAddress {
+  .inactiveClientsAddress {
     grid-column: 1/2;
     grid-row: 4/5;
   }
 
-  .inactiveClientServiceButton {
+  .inactiveClientsServiceButton {
     grid-column: 1/2;
     grid-row: 5/6;
   }
 
-  .inactiveClientListActions {
+  .inactiveClientsListActions {
     grid-column: 1/2;
     grid-row: 5/6;
   }

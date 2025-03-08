@@ -35,59 +35,59 @@ export const InactiveServicesList = (inactiveServicesListProps) => {
           <div
             key={inactiveService.id}
             style={{ backgroundColor: darkMode ? darkColor : "white" }}
-            className="inactiveServiceItem"
+            className="inactiveServicesItem"
           >
             <div
-              className="inactiveServiceClientName"
+              className="inactiveServicesClientName"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>CLIENTE:</b>
               {inactiveService.clients.name} {inactiveService.clients.last_name}
             </div>
             <div
-              className="inactiveServiceDate"
+              className="inactiveServicesDate"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>FECHA: </b>
               {dateFormat(inactiveService.date)}
             </div>
             <div
-              className="inactiveServiceDevice"
+              className="inactiveServicesDevice"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>EQUIPO REPARADO:</b>
               {inactiveService.device}
             </div>
             <div
-              className="inactiveServiceText"
+              className="inactiveServicesText"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>DETALLE SERVICIO: </b>
               {inactiveService.service_text}
             </div>
             <div
-              className="inactiveServiceInputs"
+              className="inactiveServicesInputs"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>REPUESTOS UTILIZADOS:</b>
               {inactiveService.inputs}
             </div>
             <div
-              className="inactiveServiceSerialNumber"
+              className="inactiveServicesSerialNumber"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>N° SERIE:</b>
               {inactiveService.serial_number}
             </div>
             <div
-              className="inactiveServiceInputsPrice"
+              className="inactiveServicesInputsPrice"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>PRECIO REPUESTOS: </b>
               {currencyFormat(inactiveService.inputs_price)}
             </div>
             <div
-              className="inactiveServiceTotalPrice"
+              className="inactiveServicesTotalPrice"
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>TOTAL SERVICIO:</b>

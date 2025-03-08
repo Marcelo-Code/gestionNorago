@@ -16,4 +16,5 @@ export const dateFormat = (date) => {
 };
 
 export const darkColor = "rgba(24, 70, 102, 1)";
-export const lightColor = "rgba(24, 70, 102, 0.5)";
+export const lightColor = "rgb(94, 152, 193)";
+export const buttonColor = "#1976d2";

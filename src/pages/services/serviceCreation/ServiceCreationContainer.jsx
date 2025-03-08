@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ServiceCreation } from "./ServiceCreation";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { getClients } from "../../../services/api/clients";
 import { createNewService } from "../../../services/api/services";
+import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
+import { GeneralContext } from "../../../context/GeneralContext";
 
 export const ServiceCreationContainer = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,7 @@ export const ServiceCreationContainer = () => {
   const [clientId, setClientId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [clients, setClients] = useState([]);
+  const { darkMode } = useContext(GeneralContext);
 
   const navigate = useNavigate();
 
@@ -78,6 +81,10 @@ export const ServiceCreationContainer = () => {
     clientId,
     setClientId,
     isLoading,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   };
 
   return <ServiceCreation {...serviceCreationProps} />;

@@ -17,11 +17,20 @@ export const ClientModification = (clientModificationProps) => {
     handleGoBack,
     clientId,
     modifiedFlag,
+    darkMode,
+    darkColor,
+    lightColor,
+    buttonColor,
   } = clientModificationProps;
 
   return (
     <div className="clientModificationContainer">
-      <h3 className="clientModificationTitle">Modificar Cliente</h3>
+      <h3
+        className="clientModificationTitle"
+        style={{ color: darkMode ? "white" : buttonColor }}
+      >
+        Modificar Cliente
+      </h3>
       <Box
         sx={{
           display: "flex",
@@ -29,10 +38,21 @@ export const ClientModification = (clientModificationProps) => {
           p: 2,
         }}
       >
-        <Card sx={{ maxWidth: 600, width: "100%" }}>
+        <Card
+          sx={{
+            maxWidth: 600,
+            width: "100%",
+            backgroundColor: darkMode ? lightColor : "white",
+          }}
+        >
           <CardContent>
             <Box display="flex" flexDirection="column" gap={2}>
-              <Box sx={{ width: "100%" }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  backgroundColor: "white",
+                }}
+              >
                 <TextField
                   fullWidth
                   label="Nombre"
@@ -44,7 +64,7 @@ export const ClientModification = (clientModificationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Apellido"
@@ -56,7 +76,7 @@ export const ClientModification = (clientModificationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Teléfono"
@@ -69,7 +89,7 @@ export const ClientModification = (clientModificationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Correo Electrónico"
@@ -82,7 +102,7 @@ export const ClientModification = (clientModificationProps) => {
                 />
               </Box>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%", backgroundColor: "white" }}>
                 <TextField
                   fullWidth
                   label="Dirección"
@@ -113,7 +133,11 @@ export const ClientModification = (clientModificationProps) => {
                   variant="outlined"
                   fullWidth
                   size="large"
-                  sx={{ mt: 2 }}
+                  sx={{
+                    mt: 2,
+                    borderColor: darkMode ? "white" : buttonColor,
+                    color: darkMode ? "white" : buttonColor,
+                  }}
                   onClick={() => handleGoBack()}
                 >
                   Volver
