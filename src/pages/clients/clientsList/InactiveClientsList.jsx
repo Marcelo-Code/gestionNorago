@@ -1,5 +1,5 @@
 import React from "react";
-import "./InactiveClientsList.css";
+import "./inactiveClientsList.css";
 import PersonIcon from "@mui/icons-material/Person";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
