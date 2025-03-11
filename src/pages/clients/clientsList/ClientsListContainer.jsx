@@ -1,33 +1,49 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./ClientsList.css";
 import ClientsList from "./ClientsList";
-import {
-  deleteClient,
-  getClients,
-  softDeleteClient,
-} from "../../../services/api/clients";
+import { getClients, softDeleteClient } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
-import { darkColor } from "../../../utils/helpers";
+import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
 import { ErrorContainer } from "../../../layout/error/ErrorContainer";
 import { useNavigate } from "react-router-dom";
 
 export const ClientsListContainer = () => {
-  const [editMode, setEditMode] = useState(false);
-  const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [updateList, setUpdateList] = useState(false);
-  const navigate = useNavigate();
-
   const { darkMode } = useContext(GeneralContext);
+
+  //Activar y desactivar el modo edición
+  const [editMode, setEditMode] = useState(false);
   const handleEditModeChange = (e) => {
     setEditMode(e.target.checked);
   };
 
+  // Alternar entre barra de edición y barra de búsqueda
+  //----------------------------------------------------
+  const [showSearch, setShowSearch] = useState(false);
+  const searchBarRef = useRef(null);
+  const editionBarRef = useRef(null);
+  const toggleSearchBar = () => {
+    if (!showSearch) {
+      editionBarRef.current.style.transform = "translateX(-100%)";
+      searchBarRef.current.style.transform = "translateX(0)";
+      setEditMode(false);
+    } else {
+      editionBarRef.current.style.transform = "translateX(0)";
+      searchBarRef.current.style.transform = "translateX(100%)";
+    }
+    setShowSearch(!showSearch);
+  };
+
+  //Función handleGoBack
+  //--------------------
+  const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  //Función borrar cliente
+  //----------------------
+  const [updateList, setUpdateList] = useState(false);
   const handleDeleteClient = (clientId) => {
     softDeleteClient(clientId)
       .then((response) => {
@@ -39,6 +55,10 @@ export const ClientsListContainer = () => {
       .catch((error) => console.log(error));
   };
 
+  //Importar clientes de la base de datos
+  //------------------------------------
+  const [clients, setClients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
     getClients()
@@ -59,11 +79,17 @@ export const ClientsListContainer = () => {
   const clientsListProps = {
     clients,
     handleEditModeChange,
+    setEditMode,
     editMode,
     handleDeleteClient,
     darkMode,
     darkColor,
+    lightColor,
+    buttonColor,
     handleGoBack,
+    toggleSearchBar,
+    searchBarRef,
+    editionBarRef,
   };
 
   return <ClientsList {...clientsListProps} />;

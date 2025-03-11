@@ -38,14 +38,11 @@ export const ServicesList = (servicesListProps) => {
       >
         <span style={{ marginLeft: "5vw" }}>EDICIÓN</span>
         <SwitchEditionMode onChange={handleEditModeChange} checked={editMode} />
-
-        <>
-          <Link to="/services/serviceCreation">
-            <Button variant="contained" startIcon={<AddIcon />}>
-              Crear Servicio
-            </Button>
-          </Link>
-        </>
+        <Link to="/services/serviceCreation">
+          <Button variant="contained" startIcon={<AddIcon />}>
+            Crear Servicio
+          </Button>
+        </Link>
       </div>
       <div className="servicesList">
         {services.length === 0 && (
