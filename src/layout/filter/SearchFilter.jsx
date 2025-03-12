@@ -26,7 +26,7 @@ import {
 } from "@mui/icons-material";
 import "./searchFilterComponent.css";
 
-export const SearchFilterComponent = ({
+export const SearchFilter = ({
   toggleSearchBar,
   darkMode,
   darkColor,
@@ -35,15 +35,17 @@ export const SearchFilterComponent = ({
   style,
   handleSearchChange,
   searchQuery,
-  toggleDrawer,
+  setDrawerOpen,
   drawerOpen,
   sortOption,
   handleSortChange,
-  safeSortOptions,
-  safeStatusOptions,
+
+  DEFAULT_TYPE_OPTIONS,
+  DEFAULT_STATUS_OPTIONS,
+  DEFAULT_SORT_OPTIONS,
+
   filters,
   handleFilterChange,
-  safeTypeOptions,
 }) => {
   return (
     <>
@@ -74,7 +76,7 @@ export const SearchFilterComponent = ({
 
         <IconButton
           sx={{ color: darkMode ? "white" : buttonColor }}
-          onClick={() => toggleDrawer(true)}
+          onClick={() => setDrawerOpen(true)}
           size="small"
         >
           <FilterIcon />
@@ -91,7 +93,7 @@ export const SearchFilterComponent = ({
       <Drawer
         anchor="right"
         open={drawerOpen}
-        onClose={() => toggleDrawer(false)}
+        onClose={() => setDrawerOpen(false)}
         sx={{
           "& .MuiDrawer-paper": {
             backgroundColor: darkMode ? darkColor : lightColor,
@@ -114,7 +116,7 @@ export const SearchFilterComponent = ({
           </Typography>
 
           <Box sx={{ mt: 3 }}>
-            {safeStatusOptions.length > 0 && (
+            {DEFAULT_STATUS_OPTIONS.length > 0 && (
               <FormControl fullWidth sx={{ mb: 3 }}>
                 <InputLabel id="status-label">Estado</InputLabel>
                 <Select
@@ -123,7 +125,7 @@ export const SearchFilterComponent = ({
                   value={filters.status || ""}
                   onChange={(e) => handleFilterChange("status", e.target.value)}
                 >
-                  {safeStatusOptions.map((option) => (
+                  {DEFAULT_STATUS_OPTIONS.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -132,7 +134,7 @@ export const SearchFilterComponent = ({
               </FormControl>
             )}
 
-            {safeTypeOptions.length > 0 && (
+            {DEFAULT_TYPE_OPTIONS.length > 0 && (
               <FormControl fullWidth sx={{ mb: 3 }}>
                 <InputLabel id="type-label">Tipo de cliente</InputLabel>
                 <Select
@@ -141,7 +143,7 @@ export const SearchFilterComponent = ({
                   value={filters.type || ""}
                   onChange={(e) => handleFilterChange("type", e.target.value)}
                 >
-                  {safeTypeOptions.map((option) => (
+                  {DEFAULT_TYPE_OPTIONS.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -151,17 +153,17 @@ export const SearchFilterComponent = ({
             )}
 
             {/* <FormControlLabel
-              control={
-                <Checkbox
-                  checked={filters.active || false}
-                  onChange={(e) =>
-                    handleFilterChange("active", e.target.checked)
-                  }
-                />
-              }
-              label="Solo mostrar clientes activos"
-              sx={{ mb: 3 }}
-            /> */}
+                control={
+                  <Checkbox
+                    checked={filters.active || false}
+                    onChange={(e) =>
+                      handleFilterChange("active", e.target.checked)
+                    }
+                  />
+                }
+                label="Solo mostrar clientes activos"
+                sx={{ mb: 3 }}
+              /> */}
 
             <Box sx={{ mb: 2 }}>
               <FormControl component="fieldset">
@@ -178,7 +180,7 @@ export const SearchFilterComponent = ({
                   <SortIcon fontSize="small" /> Ordenar por
                 </Typography>
                 <RadioGroup value={sortOption} onChange={handleSortChange}>
-                  {safeSortOptions.map((option) => (
+                  {DEFAULT_SORT_OPTIONS.map((option) => (
                     <FormControlLabel
                       key={option.value}
                       value={option.value}
@@ -209,18 +211,18 @@ export const SearchFilterComponent = ({
                 backgroundColor: darkMode ? darkColor : "white",
               }}
               fullWidth
-              onClick={() => toggleDrawer(false)}
+              onClick={() => setDrawerOpen(false)}
             >
               Cerrar
             </Button>
             {/* <Button
-              variant="contained"
-              onClick={() => toggleDrawer(false)}
-              sx={{ ml: 1 }}
-              fullWidth
-            >
-              Aplicar
-            </Button> */}
+                variant="contained"
+                onClick={() => toggleDrawer(false)}
+                sx={{ ml: 1 }}
+                fullWidth
+              >
+                Aplicar
+              </Button> */}
           </Box>
         </Box>
       </Drawer>
@@ -228,7 +230,7 @@ export const SearchFilterComponent = ({
   );
 };
 
-SearchFilterComponent.propTypes = {
+SearchFilter.propTypes = {
   toggleSearchBar: PropTypes.func.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,

@@ -159,9 +159,9 @@
   text-decoration: underline;
 }
 
-.servicesListEditionBar {
+.servicesListBar {
   width: 100%;
-  padding: 15px;
+  padding: 35px;
   box-shadow: 0 0 10px black;
   display: flex;
   justify-content: center;
@@ -176,4 +176,25 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.editionBarHidden,
+.searchBarHidden {
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.editionBarShowed,
+.searchBarShowed {
+  transform: translateX(0%);
+  z-index: 2;
+}
+
+.searchBar,
+.editionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  inset: 0;
 }

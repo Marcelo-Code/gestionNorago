@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ClientsList.css";
-import ClientsList from "./ClientsList";
+import { ClientsList } from "./ClientsList";
 import { getClients, softDeleteClient } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
@@ -11,6 +11,34 @@ import { useNavigate } from "react-router-dom";
 export const ClientsListContainer = () => {
   const { darkMode } = useContext(GeneralContext);
 
+  //Variables y constantes para el filtro de busqueda
+  //-------------------------------------------------
+
+  const DEFAULT_STATUS_OPTIONS = [
+    // { value: "all", label: "Todos" },
+    // { value: "active", label: "Activos" },
+    // { value: "inactive", label: "Inactivos" },
+    // { value: "pending", label: "Pendientes" },
+  ];
+
+  const DEFAULT_TYPE_OPTIONS = [
+    // { value: "all", label: "Todos" },
+    // { value: "individual", label: "Individual" },
+    // { value: "company", label: "Empresa" },
+    // { value: "government", label: "Gobierno" },
+  ];
+
+  const DEFAULT_SORT_OPTIONS = [
+    { value: "none", label: "Sin ordenar" },
+    { value: "alphabetical-asc", label: "Alfabético (A-Z)" },
+    { value: "alphabetical-desc", label: "Alfabético (Z-A)" },
+    // { value: "numeric-asc", label: "Ingresos (Menor a Mayor)" },
+    //{ value: "numeric-desc", label: "Ingresos (Mayor a Menor)" },
+  ];
+
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [activeFilters, setActiveFilters] = useState([]);
+
   //Activar y desactivar el modo edición
   const [editMode, setEditMode] = useState(false);
   const handleEditModeChange = (e) => {
@@ -19,18 +47,9 @@ export const ClientsListContainer = () => {
 
   // Alternar entre barra de edición y barra de búsqueda
   //----------------------------------------------------
+
   const [showSearch, setShowSearch] = useState(false);
-  const searchBarRef = useRef(null);
-  const editionBarRef = useRef(null);
   const toggleSearchBar = () => {
-    if (!showSearch) {
-      editionBarRef.current.style.transform = "translateX(-100%)";
-      searchBarRef.current.style.transform = "translateX(0)";
-      setEditMode(false);
-    } else {
-      editionBarRef.current.style.transform = "translateX(0)";
-      searchBarRef.current.style.transform = "translateX(100%)";
-    }
     setShowSearch(!showSearch);
   };
 
@@ -66,6 +85,9 @@ export const ClientsListContainer = () => {
         console.log(response);
         response.data = response.data.filter((client) => client.active);
         setClients(response.data);
+
+        //Se inicializa el filtro con todos los clientes
+        setFilteredClients(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -88,8 +110,14 @@ export const ClientsListContainer = () => {
     buttonColor,
     handleGoBack,
     toggleSearchBar,
-    searchBarRef,
-    editionBarRef,
+    filteredClients,
+    setFilteredClients,
+    activeFilters,
+    setActiveFilters,
+    DEFAULT_SORT_OPTIONS,
+    DEFAULT_TYPE_OPTIONS,
+    DEFAULT_STATUS_OPTIONS,
+    showSearch,
   };
 
   return <ClientsList {...clientsListProps} />;

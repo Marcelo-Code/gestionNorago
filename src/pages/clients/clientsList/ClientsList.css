@@ -12,7 +12,6 @@
   text-align: center;
   width: 100%;
   min-height: 80vh;
-  overflow-x: hidden;
 }
 
 .clientsListTitle {
@@ -163,17 +162,23 @@
   }
 }
 
-.bar {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+.editionBarHidden,
+.searchBarHidden {
+  transform: translateX(-100%);
+  z-index: 1;
 }
 
-.bar.visible {
-  opacity: 1;
+.editionBarShowed,
+.searchBarShowed {
+  transform: translateX(0%);
+  z-index: 2;
 }
 
-.viewport {
-  height: 500px;
-  /* overflow: hidden; */
-  position: relative;
+.searchBar,
+.editionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  inset: 0;
 }

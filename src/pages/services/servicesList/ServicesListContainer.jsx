@@ -3,7 +3,7 @@ import { ServicesList } from "./ServicesList";
 import { getServices, softDeleteService } from "../../../services/api/services";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
-import { darkColor } from "../../../utils/helpers";
+import { darkColor, buttonColor, lightColor } from "../../../utils/helpers";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ServicesListContainer = () => {
@@ -13,6 +13,10 @@ export const ServicesListContainer = () => {
   const [updateList, setUpdateList] = useState(false);
   const { darkMode } = useContext(GeneralContext);
   const { clientId = null } = useParams();
+
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [activeFilters, setActiveFilters] = useState([]);
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -34,6 +38,14 @@ export const ServicesListContainer = () => {
       .catch((error) => console.log(error));
   };
 
+  // Alternar entre barra de edición y barra de búsqueda
+  //----------------------------------------------------
+
+  const [showSearch, setShowSearch] = useState(false);
+  const toggleSearchBar = () => {
+    setShowSearch(!showSearch);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     getServices()
@@ -45,6 +57,7 @@ export const ServicesListContainer = () => {
             (service) => service.client_id === parseInt(clientId)
           );
         setServices(response.data);
+        setFilteredClients(response.data);
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
@@ -59,7 +72,15 @@ export const ServicesListContainer = () => {
     handleDeleteService,
     darkMode,
     darkColor,
+    lightColor,
+    buttonColor,
     handleGoBack,
+    toggleSearchBar,
+    showSearch,
+    setFilteredClients,
+    filteredClients,
+    setActiveFilters,
+    activeFilters,
   };
 
   return <ServicesList {...servicesListProps} />;
