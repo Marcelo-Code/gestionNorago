@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./burguerMenu.css";
 import PersonIcon from "@mui/icons-material/Person";
 import BuildIcon from "@mui/icons-material/Build";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { darkColor, lightColor } from "../../utils/helpers";
 import AccordionMenuContainer from "../accordionMenu/AccordionMenu";
 export const BurguerMenu = (burguerMenuProps) => {
@@ -34,6 +35,13 @@ export const BurguerMenu = (burguerMenuProps) => {
             <li className="bm-item">
               {" "}
               <BuildIcon /> Servicios
+            </li>
+          </Link>
+
+          <Link to={"/prices/pricesList"} onClick={closeMenu}>
+            <li className="bm-item">
+              {" "}
+              <AttachMoneyIcon /> Precios
             </li>
           </Link>
           <div style={{ marginTop: "80px" }}>

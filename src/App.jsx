@@ -1,6 +1,12 @@
 import { NavBarContainer } from "./layout/navBar/NavBarContainer";
 import "./index.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./index.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { ClientsListContainer } from "./pages/clients/clientsList/ClientsListContainer";
 import { FooterContainer } from "./layout/footer/FooterContainer";
 import { HomeContainer } from "./pages/home/HomeContainer";
@@ -13,9 +19,12 @@ import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
 import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
 import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
+import { LoginContainer } from "./pages/login/loginContainer";
+import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
+
   useEffect(() => {
     document.body.style.background = darkMode
       ? "linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(/images/noragoLogoFondo.jpg), linear-gradient(rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 0.8)), url(/images/noragoLogoFondo.jpg)"
@@ -27,7 +36,18 @@ function App() {
 
   return (
     <Router>
-      <NavBarContainer />
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
+  return (
+    <>
+      {!isLoginPage && <NavBarContainer />}
       <Routes>
         <Route path="/" element={<HomeContainer />} />
         <Route path="/clients/clientsList" element={<ClientsListContainer />} />
@@ -63,9 +83,11 @@ function App() {
           path="/services/serviceModification/:serviceId"
           element={<ServiceModificationContainer />}
         />
+        <Route path="/prices/pricesList" element={<PricesListContainer />} />
+        <Route path="/login" element={<LoginContainer />} />
       </Routes>
-      <FooterContainer />
-    </Router>
+      {!isLoginPage && <FooterContainer />}
+    </>
   );
 }
 

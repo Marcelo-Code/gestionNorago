@@ -50,6 +50,7 @@ export const ClientsListContainer = () => {
 
   const [showSearch, setShowSearch] = useState(false);
   const toggleSearchBar = () => {
+    if (editMode) setEditMode(false);
     setShowSearch(!showSearch);
   };
 
