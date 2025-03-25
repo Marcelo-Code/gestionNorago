@@ -65,7 +65,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: auto;
+  flex-wrap: wrap;
 }
 
 table {
@@ -89,4 +89,26 @@ td {
 
 .servicesPricesItem {
   text-align: left;
+}
+
+.servicesPricesItem {
+  margin: 10px;
+  padding: 10px;
+  padding-top: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+  max-width: 300px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.servicesPricesList {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100%;
+  min-height: 80vh;
 }

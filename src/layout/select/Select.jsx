@@ -8,13 +8,14 @@ import {
 } from "@mui/material";
 
 // Componente Select con Autocomplete y búsqueda
-export function ClientSelect({
+export function OptionSelect({
   clients,
+  getOptionLabel,
   name,
   value,
   onChange,
   label = "Cliente",
-  placeholder = "Seleccionar cliente",
+  placeholder,
   disabled = false,
   required = false,
   error = false,
@@ -25,7 +26,7 @@ export function ClientSelect({
     <Autocomplete
       name={name}
       options={clients}
-      getOptionLabel={(option) => `${option.name} ${option.last_name}`}
+      getOptionLabel={getOptionLabel}
       value={clients.find((client) => client.id === value) || null}
       onChange={(_, newValue) => {
         onChange({
@@ -49,7 +50,7 @@ export function ClientSelect({
   );
 }
 
-// Versión alternativa con Select básico si prefieres un select simple
+// Versión alternativa con Select básico
 export function ClientSelectBasic({
   clients,
   value,

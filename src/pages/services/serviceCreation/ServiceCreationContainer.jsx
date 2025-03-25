@@ -6,23 +6,27 @@ import { getClients } from "../../../services/api/clients";
 import { createNewService } from "../../../services/api/services";
 import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
 import { GeneralContext } from "../../../context/GeneralContext";
+import { getPrices } from "../../../services/api/prices";
 
 export const ServiceCreationContainer = () => {
   const [formData, setFormData] = useState({
     date: null,
     device: "",
     serial_number: "",
-    service_text: "",
-    inputs: "",
-    inputs_price: 0,
+    service_price_id: 0,
+    service_price: 0,
+    additional: "",
+    additional_price: 0,
     total_price: 0,
     client_id: 0,
     active: true,
   });
 
   const [clientId, setClientId] = useState("");
+  const [servicePriceId, setServicePriceId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [clients, setClients] = useState([]);
+  const [prices, setPrices] = useState([]);
   const { darkMode } = useContext(GeneralContext);
 
   const navigate = useNavigate();
@@ -36,14 +40,30 @@ export const ServiceCreationContainer = () => {
 
     let newValue = value;
 
-    if (name === "total_price" || name === "inputs_price") {
+    if (name === "service_price" || name === "additional_price") {
       // Convierte el valor a un número flotante
-      newValue = parseFloat(value);
+      newValue = parseFloat(value) || 0;
     }
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: newValue,
-    }));
+
+    setFormData((prevState) => {
+      let updatedState = { ...prevState, [name]: newValue };
+
+      if (name === "service_price_id") {
+        const selectedPrice = prices.find(
+          (price) => price.id === parseInt(value)
+        );
+        if (selectedPrice) {
+          updatedState.service_price = selectedPrice.service_price;
+        }
+      }
+
+      //Calcular total_price automáticamente
+      updatedState.total_price =
+        (updatedState.service_price || prevState.service_price || 0) +
+        (updatedState.additional_price || prevState.additional_price || 0);
+
+      return updatedState;
+    });
     console.log(formData);
   };
 
@@ -61,10 +81,13 @@ export const ServiceCreationContainer = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getClients()
-      .then((response) => {
-        console.log(response);
-        setClients(response.data);
+
+    Promise.all([getClients(), getPrices()])
+      .then(([clientsResponse, pricesResponse]) => {
+        console.log(clientsResponse);
+        console.log(pricesResponse);
+        setClients(clientsResponse.data);
+        setPrices(pricesResponse.data);
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
@@ -80,6 +103,9 @@ export const ServiceCreationContainer = () => {
     clients,
     clientId,
     setClientId,
+    prices,
+    servicePriceId,
+    setServicePriceId,
     isLoading,
     darkMode,
     darkColor,

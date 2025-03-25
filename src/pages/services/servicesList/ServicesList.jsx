@@ -168,14 +168,6 @@ export const ServicesList = (servicesListProps) => {
               <b style={textShadow}>EQUIPO REPARADO:</b>
               {service.device}
             </div>
-            <div className="servicesText" style={{ marginBottom: "10px" }}>
-              <b style={textShadow}>DETALLE SERVICIO: </b>
-              {service.service_text}
-            </div>
-            <div className="servicesInputs" style={{ marginBottom: "10px" }}>
-              <b style={textShadow}>REPUESTOS UTILIZADOS:</b>
-              {service.inputs}
-            </div>
             <div
               className="servicesSerialNumber"
               style={{ marginBottom: "10px" }}
@@ -183,12 +175,27 @@ export const ServicesList = (servicesListProps) => {
               <b style={textShadow}>N° SERIE:</b>
               {service.serial_number}
             </div>
+            <div className="servicesText" style={{ marginBottom: "10px" }}>
+              <b style={textShadow}>SERVICIO: </b>
+              {service.prices.service_name}
+            </div>
+            <div className="servicesPrice" style={{ marginBottom: "10px" }}>
+              <b style={textShadow}>PRECIO SERVICIO: </b>
+              {currencyFormat(service.prices.service_price)}
+            </div>
             <div
-              className="servicesInputsPrice"
+              className="servicesAdditional"
               style={{ marginBottom: "10px" }}
             >
-              <b style={textShadow}>PRECIO REPUESTOS: </b>
-              {currencyFormat(service.inputs_price)}
+              <b style={textShadow}>ADICIONAL:</b>
+              {service.additional}
+            </div>
+            <div
+              className="servicesAdditionalPrice"
+              style={{ marginBottom: "10px" }}
+            >
+              <b style={textShadow}>PRECIO ADICIONAL: </b>
+              {currencyFormat(service.additional_price)}
             </div>
             <div
               className="servicesTotalPrice"

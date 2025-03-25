@@ -147,7 +147,8 @@ export const PricesList = (servicesListProps) => {
         {filteredPrices.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
-        <table>
+
+        {/* <table>
           <thead>
             <tr style={{ backgroundColor: darkMode ? darkColor : "white" }}>
               <th style={textShadow}>NOMBRE</th>
@@ -193,7 +194,62 @@ export const PricesList = (servicesListProps) => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+
+        {filteredPrices.map((price) => (
+          <div
+            key={price.id}
+            style={{ backgroundColor: darkMode ? darkColor : "white" }}
+            className="servicesPricesItem"
+          >
+            <span
+              style={{
+                width: "100%",
+                textAlign: "center",
+                margin: "10px 0",
+                borderBottom: "1px solid  rgb(196, 217, 238",
+              }}
+            >
+              <b style={textShadow}>SERVICIO: </b>
+            </span>
+            {price.service_name}
+
+            <span
+              style={{
+                width: "100%",
+                textAlign: "center",
+                margin: "10px 0",
+                borderBottom: "1px solid rgb(196, 217, 238)",
+              }}
+            >
+              <b style={textShadow}>PRECIO: </b>
+            </span>
+            {currencyFormat(price.service_price)}
+
+            {editMode && (
+              <div className="servicesListActions">
+                <Link>
+                  <DeleteIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+                <Link>
+                  <EditIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
       <Button
         variant="outlined"
