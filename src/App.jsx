@@ -19,7 +19,7 @@ import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
 import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
 import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
-import { LoginContainer } from "./pages/login/loginContainer";
+import { LoginContainer } from "./pages/login/LoginContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 
 function App() {
