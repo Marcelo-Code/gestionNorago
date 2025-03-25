@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-import { currencyFormat, dateFormat } from "../../../utils/helpers";
+import { currencyFormat } from "../../../utils/helpers";
 import { SearchFilterContainer } from "../../../layout/filter/SearchFilterContainer";
 
 export const PricesList = (servicesListProps) => {

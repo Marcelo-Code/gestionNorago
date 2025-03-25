@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import "./serviceModification.css";
 import SaveIcon from "@mui/icons-material/Save";
-import { ClientSelect } from "../../../layout/select/Select";
+import { OptionSelect } from "../../../layout/select/Select";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 export const ServiceModification = (serviceModificationProps) => {
@@ -52,7 +52,7 @@ export const ServiceModification = (serviceModificationProps) => {
         >
           <CardContent>
             <Box display="flex" flexDirection="column" gap={2}>
-              <ClientSelect
+              <OptionSelect
                 name="client_id"
                 clients={clients}
                 value={formData.client_id}
