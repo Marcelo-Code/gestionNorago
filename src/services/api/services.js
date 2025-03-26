@@ -101,7 +101,7 @@ export const softDeleteService = async (serviceId) => {
       errorAlert("Error al eliminar el servicio");
       return {
         status: 500,
-        message: "Error al aliminar el servicio",
+        message: "Error al eliminar el servicio",
         error: error.message,
       };
     }

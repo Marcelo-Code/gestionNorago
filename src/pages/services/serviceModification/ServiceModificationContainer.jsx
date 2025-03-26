@@ -4,25 +4,23 @@ import { ServiceModification } from "./ServiceModification";
 import { getService, updateService } from "../../../services/api/services";
 import { getClients } from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
-import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
+import {
+  darkColor,
+  lightColor,
+  buttonColor,
+  useFormData,
+  handleServiceChange,
+} from "../../../utils/helpers";
 import { GeneralContext } from "../../../context/GeneralContext";
+import { getPrices } from "../../../services/api/prices";
 
 export const ServiceModificationContainer = () => {
-  const [formData, setFormData] = useState({
-    client_id: "",
-    date: null,
-    device: "",
-    serial_number: "",
-    service_text: "",
-    inputs: "",
-    inputs_price: 0,
-    total_price: 0,
-  });
-
+  const [formData, setFormData] = useFormData();
   const { serviceId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [modifiedFlag, setModifiedFlag] = useState(false);
   const [clients, setClients] = useState([]);
+  const [prices, setPrices] = useState([]);
   const { darkMode } = useContext(GeneralContext);
 
   const handleUpdateService = (serviceId, formData) => {
@@ -40,35 +38,30 @@ export const ServiceModificationContainer = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    if (modifiedFlag === false) setModifiedFlag(true);
+    setFormData((prevState) => {
+      const updatedState = handleServiceChange(e, prevState, prices);
+      if (JSON.stringify(updatedState) !== JSON.stringify(prevState)) {
+        setModifiedFlag(true);
+      }
+      return updatedState;
+    });
   };
 
   useEffect(() => {
     setIsLoading(true);
-    getService(serviceId)
-      .then((response) => {
-        console.log(response);
-        setFormData(response.data[0]);
+
+    Promise.all([getClients(), getPrices(), getService(serviceId)])
+      .then(([clientsResponse, pricesResponse, serviceResponse]) => {
+        console.log(clientsResponse);
+        console.log(pricesResponse);
+        console.log(serviceResponse);
+        setClients(clientsResponse.data);
+        setPrices(pricesResponse.data);
+        setFormData(serviceResponse.data[0]);
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
   }, [serviceId]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getClients()
-      .then((response) => {
-        console.log(response);
-        setClients(response.data);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => setIsLoading(false));
-  }, []);
 
   if (isLoading) return <LoadingContainer />;
 
@@ -76,6 +69,7 @@ export const ServiceModificationContainer = () => {
     handleChange,
     handleGoBack,
     clients,
+    prices,
     serviceId,
     formData,
     handleUpdateService,

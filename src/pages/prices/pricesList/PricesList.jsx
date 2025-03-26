@@ -9,13 +9,17 @@ import { Button, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { currencyFormat } from "../../../utils/helpers";
 import { SearchFilterContainer } from "../../../layout/filter/SearchFilterContainer";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
+import { softUndeletePrice } from "../../../services/api/prices";
+import { Height } from "@mui/icons-material";
 
 export const PricesList = (servicesListProps) => {
   const {
     prices,
     handleEditModeChange,
     editMode,
-    // handleDeleteService,
+    handleDeletePrice,
+    handleUndeletePrice,
     darkMode,
     darkColor,
     lightColor,
@@ -27,6 +31,7 @@ export const PricesList = (servicesListProps) => {
     filteredPrices,
     setActiveFilters,
     activeFilters,
+    active,
   } = servicesListProps;
 
   const DEFAULT_STATUS_OPTIONS = [
@@ -82,60 +87,63 @@ export const PricesList = (servicesListProps) => {
         style={{ color: darkMode ? "white" : "#1976d2" }}
         className="pricesListTitle"
       >
-        Precios
+        {active === "true" ? "Precios" : "Precios Inactivos"}
       </h2>
-      <div
-        style={{ backgroundColor: darkMode ? darkColor : "white" }}
-        className="pricesListBar"
-      >
+      {active === "true" && (
         <div
-          className={`editionBar ${
-            showSearch ? "editionBarHidden" : "editionBarShowed"
-          }`}
-          style={{
-            backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
-          }}
+          style={{ backgroundColor: darkMode ? darkColor : "white" }}
+          className="pricesListBar"
         >
-          <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
-            EDICIÓN
-            <SwitchEditionMode
-              onChange={handleEditModeChange}
-              checked={editMode}
-            />
-          </span>
-          <Link to="/services/serviceCreation">
-            <Button variant={"contained"} startIcon={<AddIcon />}>
-              Precio
-            </Button>
-          </Link>
-
-          <IconButton
-            onClick={() => toggleSearchBar()}
-            size="small"
-            sx={{ color: darkMode ? "white" : buttonColor }}
+          <div
+            className={`editionBar ${
+              showSearch ? "editionBarHidden" : "editionBarShowed"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
           >
-            <SearchIcon />
-          </IconButton>
-        </div>
+            <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
+              EDICIÓN
+              <SwitchEditionMode
+                onChange={handleEditModeChange}
+                checked={editMode}
+              />
+            </span>
+            <Link to="/prices/priceCreation">
+              <Button variant={"contained"} startIcon={<AddIcon />}>
+                Precio
+              </Button>
+            </Link>
 
-        <div
-          className={`searchBar ${
-            showSearch ? "searchBarShowed" : "searchBarHidden"
-          }`}
-          style={{
-            backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
-          }}
-        >
-          {/* Barra de búsqueda y filtros */}
-          {/* <SearchFilterContainer
+            <IconButton
+              onClick={() => toggleSearchBar()}
+              size="small"
+              sx={{ color: darkMode ? "white" : buttonColor }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </div>
+
+          <div
+            className={`searchBar ${
+              showSearch ? "searchBarShowed" : "searchBarHidden"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
+          >
+            {/* Barra de búsqueda y filtros */}
+            {/* <SearchFilterContainer
             {...searchFilterContainerProps}
             clients={prices}
             showSearchFilter={true}
           /> */}
+          </div>
         </div>
-      </div>
+      )}
+
       {/* Contenedor de filter chips */}
       {/* <SearchFilterContainer
         {...searchFilterContainerProps}
@@ -147,54 +155,6 @@ export const PricesList = (servicesListProps) => {
         {filteredPrices.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
-
-        {/* <table>
-          <thead>
-            <tr style={{ backgroundColor: darkMode ? darkColor : "white" }}>
-              <th style={textShadow}>NOMBRE</th>
-              <th style={textShadow}>PRECIO</th>
-              {editMode && <th style={textShadow}>EDICIÓN</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPrices.map((price) => (
-              <tr
-                key={price.id}
-                style={{ backgroundColor: darkMode ? darkColor : "white" }}
-                className="servicesPricesItem"
-              >
-                <td style={{ minWidth: "250px", paddingLeft: "40px" }}>
-                  {price.service_name}
-                </td>
-                <td>{currencyFormat(price.service_price)}</td>
-                {editMode && (
-                  <td>
-                    <div className="servicesListActions">
-                      <Link>
-                        <DeleteIcon
-                          sx={{
-                            fontSize: "2em",
-                            margin: "5px",
-                            color: darkMode ? "white" : "#1976d2",
-                          }}
-                        />
-                      </Link>
-                      <Link>
-                        <EditIcon
-                          sx={{
-                            fontSize: "2em",
-                            margin: "5px",
-                            color: darkMode ? "white" : "#1976d2",
-                          }}
-                        />
-                      </Link>
-                    </div>
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
 
         {filteredPrices.map((price) => (
           <div
@@ -226,19 +186,35 @@ export const PricesList = (servicesListProps) => {
             </span>
             {currencyFormat(price.service_price)}
 
-            {editMode && (
-              <div className="servicesListActions">
-                <Link>
-                  <DeleteIcon
-                    sx={{
-                      fontSize: "2em",
-                      margin: "5px",
-                      color: darkMode ? "white" : "#1976d2",
-                    }}
-                  />
-                </Link>
-                <Link>
-                  <EditIcon
+            {active === "true" ? (
+              editMode ? (
+                <div className="pricesListActions">
+                  <Link onClick={() => handleDeletePrice(price.id)}>
+                    <DeleteIcon
+                      sx={{
+                        fontSize: "2em",
+                        margin: "5px",
+                        color: darkMode ? "white" : "#1976d2",
+                      }}
+                    />
+                  </Link>
+                  <Link to={`/prices/priceModification/${price.id}`}>
+                    <EditIcon
+                      sx={{
+                        fontSize: "2em",
+                        margin: "5px",
+                        color: darkMode ? "white" : "#1976d2",
+                      }}
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <div className="pricesListActions" />
+              )
+            ) : (
+              <div className="pricesListActions">
+                <Link onClick={() => handleUndeletePrice(price.id)}>
+                  <RestoreFromTrashIcon
                     sx={{
                       fontSize: "2em",
                       margin: "5px",

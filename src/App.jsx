@@ -21,6 +21,9 @@ import { InactiveClientsListContainer } from "./pages/clients/clientsList/Inacti
 import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
 import { LoginContainer } from "./pages/login/LoginContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
+import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
+import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
+import MonthlyServicesTable from "./components/MonthlyServicesTable";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -83,7 +86,19 @@ function AppContent() {
           path="/services/serviceModification/:serviceId"
           element={<ServiceModificationContainer />}
         />
-        <Route path="/prices/pricesList" element={<PricesListContainer />} />
+        <Route
+          path="/prices/pricesList/:active"
+          element={<PricesListContainer />}
+        />
+        <Route
+          path="/prices/priceCreation"
+          element={<PriceCreationContainer />}
+        />
+        <Route
+          path="/prices/priceModification/:priceId"
+          element={<PriceModificationContainer />}
+        />
+        <Route path="/monthly-services" element={<MonthlyServicesTable />} />
         <Route path="/login" element={<LoginContainer />} />
       </Routes>
       {!isLoginPage && <FooterContainer />}

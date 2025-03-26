@@ -9,6 +9,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 export default function AccordionMenu({
   closeMenu,
@@ -55,6 +56,12 @@ export default function AccordionMenu({
               <li className="accordionItem">
                 <BuildIcon /> Servicios{" "}
               </li>{" "}
+            </Link>
+            <Link to={`/prices/pricesList/false`} onClick={closeMenu}>
+              <li className="accordionItem">
+                {" "}
+                <AttachMoneyIcon /> Precios
+              </li>
             </Link>
           </Typography>
         </AccordionDetails>

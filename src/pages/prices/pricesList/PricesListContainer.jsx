@@ -2,8 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor, buttonColor, lightColor } from "../../../utils/helpers";
-import { useNavigate } from "react-router-dom";
-import { getPrices } from "../../../services/api/prices";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getPrices,
+  softDeletePrice,
+  softUndeletePrice,
+} from "../../../services/api/prices";
 import { PricesList } from "./PricesList";
 
 export const PricesListContainer = () => {
@@ -16,6 +20,8 @@ export const PricesListContainer = () => {
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
 
+  const { active } = useParams();
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -26,16 +32,27 @@ export const PricesListContainer = () => {
     setEditMode(e.target.checked);
   };
 
-  //   const handleDeleteService = (clientId) => {
-  //     softDeleteService(clientId)
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           console.log(response);
-  //           setUpdateList(!updateList);
-  //         }
-  //       })
-  //       .catch((error) => console.log(error));
-  //   };
+  const handleDeletePrice = (priceId) => {
+    softDeletePrice(priceId)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setUpdateList(!updateList);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleUndeletePrice = (priceId) => {
+    softUndeletePrice(priceId)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setUpdateList(!updateList);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   // Alternar entre barra de edición y barra de búsqueda
   //----------------------------------------------------
@@ -47,17 +64,21 @@ export const PricesListContainer = () => {
   };
 
   useEffect(() => {
+    const activeValue = active === "true";
+    console.log(activeValue);
     setIsLoading(true);
     getPrices()
       .then((response) => {
         console.log(response);
-        response.data = response.data.filter((price) => price.active);
+        response.data = response.data.filter(
+          (price) => price.active === activeValue
+        );
         setPrices(response.data);
         setFilteredPrices(response.data);
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
-  }, [updateList]);
+  }, [updateList, active]);
 
   if (isLoading) return <LoadingContainer />;
 
@@ -65,7 +86,8 @@ export const PricesListContainer = () => {
     prices,
     handleEditModeChange,
     editMode,
-    // handleDeleteService,
+    handleDeletePrice,
+    handleUndeletePrice,
     darkMode,
     darkColor,
     lightColor,
@@ -77,6 +99,7 @@ export const PricesListContainer = () => {
     filteredPrices,
     setActiveFilters,
     activeFilters,
+    active,
   };
 
   return <PricesList {...pricesListProps} />;
