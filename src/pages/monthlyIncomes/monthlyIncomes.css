@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "horndon";
+  src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
+}
+
+.monthlyIncomesTitle {
+  font-family: "horndon";
+  font-size: 1.7em;
+  color: steelblue;
+  text-shadow: 0 0 20px white;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.monthlyIncomesContainer {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100%;
+  min-height: 80vh;
+}
+
+.monthlyIncomesTable {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+}
+
+.monthlyIncomesChart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.monthlyIncomesFilters {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}

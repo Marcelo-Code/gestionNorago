@@ -52,7 +52,7 @@ export const BurguerMenu = (burguerMenuProps) => {
 
           <Link to={"/monthly-services"} onClick={closeMenu}>
             <li className="bm-item">
-              <QueryStatsIcon /> Ganancias
+              <QueryStatsIcon /> Ingresos
             </li>
           </Link>
           <div style={{ marginTop: "20px" }}>

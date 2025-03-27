@@ -19,6 +19,17 @@ export const dateFormat = (date) => {
   return new Date(date).toLocaleDateString("es-AR", options);
 };
 
+//Función para dar formato de fecha YYYY-MM
+export const monthFormat = (date) => {
+  const formatter = new Intl.DateTimeFormat("es-ES", {
+    year: "numeric",
+    month: "2-digit",
+    timeZone: "UTC",
+  });
+  const monthYear = formatter.format(new Date(date));
+  return monthYear;
+};
+
 //Función para manejar el estado de los formularios
 export const useFormData = () => {
   const [formData, setFormData] = useState({

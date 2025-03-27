@@ -87,7 +87,7 @@ export const PricesList = (servicesListProps) => {
         style={{ color: darkMode ? "white" : "#1976d2" }}
         className="pricesListTitle"
       >
-        {active === "true" ? "Precios" : "Precios Inactivos"}
+        {active === "true" ? "Precios Servicios" : "Precios Inactivos"}
       </h2>
       {active === "true" && (
         <div

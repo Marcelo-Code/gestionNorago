@@ -23,7 +23,7 @@ import { LoginContainer } from "./pages/login/LoginContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
-import MonthlyServicesTable from "./components/MonthlyServicesTable";
+import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesContainer";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -98,7 +98,7 @@ function AppContent() {
           path="/prices/priceModification/:priceId"
           element={<PriceModificationContainer />}
         />
-        <Route path="/monthly-services" element={<MonthlyServicesTable />} />
+        <Route path="/monthly-services" element={<MonthlyIncomesContainer />} />
         <Route path="/login" element={<LoginContainer />} />
       </Routes>
       {!isLoginPage && <FooterContainer />}
