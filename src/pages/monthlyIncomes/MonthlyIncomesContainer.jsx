@@ -12,11 +12,12 @@ export const MonthlyIncomesContainer = () => {
 
   const { darkMode } = useContext(GeneralContext);
 
-  // Establecer las fechas por defecto (últimos 12 meses)
-  const [startDate, setStartDate] = useState(
-    dayjs().subtract(12, "month").startOf("month")
-  );
-  const [endDate, setEndDate] = useState(dayjs().endOf("month"));
+  // Se establecen las fechas por defecto, los últimos 12 meses
+  const now = dayjs();
+  const end = now.startOf("month"); // Primer día del mes actual
+  const start = now.subtract(12, "month").startOf("month"); // Primer día de hace 12 meses
+  const [startDate, setStartDate] = useState(start);
+  const [endDate, setEndDate] = useState(end);
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -29,45 +30,68 @@ export const MonthlyIncomesContainer = () => {
   useEffect(() => {
     setIsLoading(true);
     getServices()
-      .then(({ data: services }) => {
-        // Inicializa monthlyTotals con los últimos 12 meses en 0
-        const monthlyTotals = {};
-        const now = new Date();
+      .then((response) => {
+        const dias = response.data;
 
-        // Genera las claves de los últimos 12 meses
-        for (let i = 0; i < 12; i++) {
-          const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-          monthlyTotals[monthFormat(date)] = 0;
+        // Genera una lista de todos los meses dentro del rango de fechas
+        const allMonths = [];
+        let currentMonth = startDate.clone().startOf("month");
+        const endMonth = endDate.clone().endOf("month");
+
+        // Agregar todos los meses en el rango al array `allMonths`
+        while (
+          currentMonth.isBefore(endMonth) ||
+          currentMonth.isSame(endMonth, "month")
+        ) {
+          allMonths.push(monthFormat(currentMonth)); // Usar monthFormat para formatear mes/año
+          currentMonth = currentMonth.add(1, "month");
         }
 
-        // Filtra y suma los valores dentro del rango de fechas
-        services
-          .filter(({ date }) => {
-            const serviceDate = dayjs(date);
-            return serviceDate.isBetween(startDate, endDate, null, "[]");
-          })
-          .forEach(({ date, total_price }) => {
-            const monthYear = monthFormat(date);
+        console.log(allMonths);
+
+        const filteredDays = dias.filter((dia) => {
+          const diaDate = dayjs(dia.date);
+          return diaDate.isBetween(startDate, endDate, null, "[]"); // Filtrar con dayjs
+        });
+
+        // Genera las claves y el total_price para los meses filtrados
+        const monthlyTotals = {};
+
+        // Inicializar todos los meses con 0
+        allMonths.forEach((month) => {
+          monthlyTotals[month] = 0;
+        });
+
+        // Filtra y suma los valores dentro del rango de fechas de los días filtrados
+        filteredDays.forEach(({ date, total_price }) => {
+          const monthYear = monthFormat(date);
+
+          // Suma el total_price al mes correspondiente
+          if (monthlyTotals[monthYear] !== undefined) {
             monthlyTotals[monthYear] += total_price;
-          });
+          }
+        });
+
+        console.log(monthlyTotals);
 
         setMonthlyData(monthlyTotals);
       })
       .catch((error) => console.error("Error fetching services:", error))
       .finally(() => setIsLoading(false));
-  }, [startDate, endDate]); // Dependencias de startDate y endDate
+  }, [startDate, endDate]);
 
   if (isLoading) {
     return <LoadingContainer />;
   }
 
-  const data = Object.entries(monthlyData).map(([month, revenue]) => ({
-    month,
-    revenue,
+  const data = Object.entries(monthlyData).map(([mes, ingresos]) => ({
+    mes,
+    ingresos,
   }));
 
-  const monthYearList = Object.keys(monthlyData).sort(
-    (a, b) => new Date(a) - new Date(b)
+  // Ordenar correctamente los meses
+  const monthYearList = Object.keys(monthlyData).sort((a, b) =>
+    dayjs(a, "MM/YYYY").isBefore(dayjs(b, "MM/YYYY")) ? 1 : -1
   );
 
   const monthlyIncomesContainerProps = {
