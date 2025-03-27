@@ -69,25 +69,6 @@
   flex-wrap: wrap;
 }
 
-table {
-  background-color: white;
-  padding: 20px;
-}
-
-th {
-  border-bottom: 1px solid black;
-}
-
-tr {
-  height: 40px;
-}
-
-td {
-  width: auto;
-  padding-left: 20px;
-  padding-bottom: 10px;
-}
-
 .servicesPricesItem {
   text-align: left;
 }

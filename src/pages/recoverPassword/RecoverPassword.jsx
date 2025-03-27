@@ -4,13 +4,13 @@ import { Container, TextField, Button, Box, Typography } from "@mui/material";
 import "./login.css";
 import { Link } from "react-router-dom";
 
-export const Login = ({
-  handleLogin,
+export const RecoverPassword = ({
+  handleGoBack,
+  handleRecoverPassword,
   email,
   setEmail,
-  password,
-  setPassword,
   error,
+  successMessage,
 }) => {
   return (
     <Container component="main" maxWidth="xs" className="loginContainer">
@@ -22,7 +22,7 @@ export const Login = ({
         }}
       >
         <Box component="form" noValidate sx={{ mt: 1 }} className="loginForm">
-          <span className="loginTitle">Login</span>
+          <span className="loginTitle">Recuperar Contraseña</span>
           <TextField
             margin="normal"
             required
@@ -36,50 +36,31 @@ export const Login = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            sx={{ backgroundColor: "white" }}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             startIcon={<LoginIcon />}
-            onClick={handleLogin}
+            onClick={handleRecoverPassword}
           >
-            LogIn
+            Recuperar Contraseña
           </Button>
           {error && (
             <Typography color="error" align="center">
               {error}
             </Typography>
           )}
-          <Box
-            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            <Typography>
-              <Link
-                to={"/recoverPassword"}
-                style={{ color: "white", justifySelf: "center" }}
-              >
-                Olvidé mi contraseña
-              </Link>
+          {successMessage && (
+            <Typography color="primary" align="center">
+              {successMessage}
             </Typography>
-          </Box>
+          )}
         </Box>
+        <Button fullWidth variant="outlined" onClick={handleGoBack}>
+          Volver
+        </Button>
       </Box>
     </Container>
   );
 };
-
-export default Login;

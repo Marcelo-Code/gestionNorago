@@ -44,4 +44,26 @@
   gap: 20px;
   padding: 10px;
   box-shadow: 0 0 10px black;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+table {
+  background-color: white;
+  padding: 20px;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+tr {
+  height: 40px;
+}
+
+td {
+  width: auto;
+  padding-left: 20px;
+  padding-bottom: 10px;
 }

@@ -23,8 +23,10 @@ import { PricesListContainer } from "./pages/prices/pricesList/PricesListContain
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
 import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesContainer";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginContainer } from "./pages/login/LoggedInContainer";
+import { RecoverPasswordContainer } from "./pages/recoverPassword/RecoverPasswordContainer";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -47,12 +49,17 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const isLoginPage =
+    location.pathname === "/login" ||
+    location.pathname === "/recoverPassword" ||
+    location.pathname === "/update-password";
 
   return (
     <>
       {!isLoginPage && <NavBarContainer />}
       <Routes>
+        <Route path="/recoverPassword" element={<RecoverPasswordContainer />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route
           path="/*"
