@@ -19,11 +19,12 @@ import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
 import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
 import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
-import { LoginContainer } from "./pages/login/LoginContainer";
+import { LoginContainer } from "./pages/login/loginContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
 import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesContainer";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -52,54 +53,69 @@ function AppContent() {
     <>
       {!isLoginPage && <NavBarContainer />}
       <Routes>
-        <Route path="/" element={<HomeContainer />} />
-        <Route path="/clients/clientsList" element={<ClientsListContainer />} />
-        <Route
-          path="/clients/inactiveClientsList"
-          element={<InactiveClientsListContainer />}
-        />
-        <Route
-          path="/clients/clientCreation"
-          element={<ClientCreationContainer />}
-        />
-        <Route
-          path="/clients/clientModification/:clientId"
-          element={<ClientModificactionContainer />}
-        />
-        <Route
-          path="/services/servicesList"
-          element={<ServicesListContainer />}
-        />
-        <Route
-          path="/services/servicesList/:clientId"
-          element={<ServicesListContainer />}
-        />
-        <Route
-          path="/services/inactiveServicesList"
-          element={<InactiveServicesListContainer />}
-        />
-        <Route
-          path="/services/serviceCreation"
-          element={<ServiceCreationContainer />}
-        />
-        <Route
-          path="/services/serviceModification/:serviceId"
-          element={<ServiceModificationContainer />}
-        />
-        <Route
-          path="/prices/pricesList/:active"
-          element={<PricesListContainer />}
-        />
-        <Route
-          path="/prices/priceCreation"
-          element={<PriceCreationContainer />}
-        />
-        <Route
-          path="/prices/priceModification/:priceId"
-          element={<PriceModificationContainer />}
-        />
-        <Route path="/monthly-services" element={<MonthlyIncomesContainer />} />
         <Route path="/login" element={<LoginContainer />} />
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <Routes>
+                <Route path="/" element={<HomeContainer />} />
+                <Route
+                  path="/clients/clientsList"
+                  element={<ClientsListContainer />}
+                />
+                <Route
+                  path="/clients/inactiveClientsList"
+                  element={<InactiveClientsListContainer />}
+                />
+                <Route
+                  path="/clients/clientCreation"
+                  element={<ClientCreationContainer />}
+                />
+                <Route
+                  path="/clients/clientModification/:clientId"
+                  element={<ClientModificactionContainer />}
+                />
+                <Route
+                  path="/services/servicesList"
+                  element={<ServicesListContainer />}
+                />
+                <Route
+                  path="/services/servicesList/:clientId"
+                  element={<ServicesListContainer />}
+                />
+                <Route
+                  path="/services/inactiveServicesList"
+                  element={<InactiveServicesListContainer />}
+                />
+                <Route
+                  path="/services/serviceCreation"
+                  element={<ServiceCreationContainer />}
+                />
+                <Route
+                  path="/services/serviceModification/:serviceId"
+                  element={<ServiceModificationContainer />}
+                />
+                <Route
+                  path="/prices/pricesList/:active"
+                  element={<PricesListContainer />}
+                />
+                <Route
+                  path="/prices/priceCreation"
+                  element={<PriceCreationContainer />}
+                />
+                <Route
+                  path="/prices/priceModification/:priceId"
+                  element={<PriceModificationContainer />}
+                />
+                <Route
+                  path="/monthlyIncomes"
+                  element={<MonthlyIncomesContainer />}
+                />
+              </Routes>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       {!isLoginPage && <FooterContainer />}
     </>

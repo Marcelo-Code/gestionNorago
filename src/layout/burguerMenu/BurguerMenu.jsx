@@ -50,7 +50,7 @@ export const BurguerMenu = (burguerMenuProps) => {
             </li>
           </Link>
 
-          <Link to={"/monthly-services"} onClick={closeMenu}>
+          <Link to={"/monthlyIncomes"} onClick={closeMenu}>
             <li className="bm-item">
               <QueryStatsIcon /> Ingresos
             </li>

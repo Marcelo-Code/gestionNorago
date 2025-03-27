@@ -4,7 +4,14 @@ import { Container, TextField, Button, Box, Typography } from "@mui/material";
 import "./login.css";
 import { Link } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({
+  handleLogin,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  error,
+}) => {
   return (
     <Container component="main" maxWidth="xs" className="loginContainer">
       <Box
@@ -20,12 +27,14 @@ export const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="username"
-            label="email"
+            id="email"
+            label="Email Address"
             name="email"
             autoComplete="email"
             autoFocus
             sx={{ backgroundColor: "white" }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -37,6 +46,8 @@ export const Login = () => {
             id="password"
             autoComplete="current-password"
             sx={{ backgroundColor: "white" }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -44,10 +55,15 @@ export const Login = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             startIcon={<LoginIcon />}
-            onClick={() => alert("LogIn")}
+            onClick={handleLogin}
           >
             LogIn
           </Button>
+          {error && (
+            <Typography color="error" align="center">
+              {error}
+            </Typography>
+          )}
           <Box
             sx={{ width: "100%", display: "flex", justifyContent: "center" }}
           >

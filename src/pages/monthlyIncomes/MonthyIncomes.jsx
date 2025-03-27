@@ -8,12 +8,10 @@ import {
   Legend,
 } from "recharts";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "./monthlyIncomes.css";
-import { buttonColor, currencyFormat } from "../../utils/helpers";
-
+import { buttonColor, currencyFormat, darkColor } from "../../utils/helpers";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 dayjs.locale("es");
@@ -53,7 +51,10 @@ export const MonthlyIncomes = (monthlyIncomesContainerProps) => {
             marginBottom: "20px",
           }}
         >
-          <div className="monthlyIncomesFilters">
+          <div
+            className="monthlyIncomesFiltersBar"
+            style={{ backgroundColor: darkMode ? darkColor : "white" }}
+          >
             <DatePicker
               label="Mes inicio"
               value={startDate}
@@ -90,11 +91,13 @@ export const MonthlyIncomes = (monthlyIncomesContainerProps) => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="mes"
-              tick={{ fill: "black", angle: -45, textAnchor: "end" }} // Rotar etiquetas 45° hacia la izquierda
+              // Rotar etiquetas 45° hacia la izquierda
+              tick={{ fill: "black", angle: -45, textAnchor: "end" }}
               height={60}
             />
             <YAxis
-              tick={{ fill: "black" }} // Color de las letras en el eje X
+              // Color de las letras en el eje X
+              tick={{ fill: "black" }}
               tickFormatter={(value) =>
                 new Intl.NumberFormat("es-AR", {
                   style: "currency",
