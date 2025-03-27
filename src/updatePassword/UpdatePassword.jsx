@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabaseClient } from "../services/config/config";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Container, TextField, Button, Box, Typography } from "@mui/material";
-import "./recoverPassword/recoverPassword.css";
+import "./recoverPassword.css";
 
 const UpdatePassword = () => {
   const [newPassword, setNewPassword] = useState("");
