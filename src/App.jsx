@@ -19,12 +19,12 @@ import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
 import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
 import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
-import { LoginContainer } from "./pages/login/loginContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
 import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesContainer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { LoginContainer } from "./pages/login/LoggedInContainer";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
