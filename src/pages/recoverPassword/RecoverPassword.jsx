@@ -1,8 +1,8 @@
 import React from "react";
 import LoginIcon from "@mui/icons-material/Login";
 import { Container, TextField, Button, Box, Typography } from "@mui/material";
-import "./login.css";
-import { Link } from "react-router-dom";
+import "./recoverPassword.css";
+import SendIcon from "@mui/icons-material/Send";
 
 export const RecoverPassword = ({
   handleGoBack,
@@ -13,7 +13,11 @@ export const RecoverPassword = ({
   successMessage,
 }) => {
   return (
-    <Container component="main" maxWidth="xs" className="loginContainer">
+    <Container
+      component="main"
+      maxWidth="xs"
+      className="recoverPasswordContainer"
+    >
       <Box
         sx={{
           display: "flex",
@@ -21,7 +25,12 @@ export const RecoverPassword = ({
           alignItems: "center",
         }}
       >
-        <Box component="form" noValidate sx={{ mt: 1 }} className="loginForm">
+        <Box
+          component="form"
+          noValidate
+          sx={{ mt: 1 }}
+          className="recoverPasswordForm"
+        >
           <span className="loginTitle">Recuperar Contraseña</span>
           <TextField
             margin="normal"
@@ -41,25 +50,32 @@ export const RecoverPassword = ({
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            startIcon={<LoginIcon />}
+            startIcon={<SendIcon />}
             onClick={handleRecoverPassword}
           >
-            Recuperar Contraseña
+            Enviar Link
           </Button>
           {error && (
-            <Typography color="error" align="center">
+            <Typography color="white" align="center">
               {error}
             </Typography>
           )}
-          {successMessage && (
-            <Typography color="primary" align="center">
-              {successMessage}
-            </Typography>
+          {!successMessage && (
+            <>
+              <Typography color="white" align="center">
+                {successMessage}
+              </Typography>
+            </>
           )}
+          <Button
+            fullWidth
+            variant="outlined"
+            style={{ border: "1px solid white", color: "white" }}
+            onClick={handleGoBack}
+          >
+            Volver
+          </Button>
         </Box>
-        <Button fullWidth variant="outlined" onClick={handleGoBack}>
-          Volver
-        </Button>
       </Box>
     </Container>
   );

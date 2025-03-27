@@ -26,7 +26,7 @@ import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesCo
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginContainer } from "./pages/login/LoggedInContainer";
 import { RecoverPasswordContainer } from "./pages/recoverPassword/RecoverPasswordContainer";
-import UpdatePassword from "./pages/UpdatePassword";
+import UpdatePassword from "./updatePassword/UpdatePassword";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -52,14 +52,14 @@ function AppContent() {
   const isLoginPage =
     location.pathname === "/login" ||
     location.pathname === "/recoverPassword" ||
-    location.pathname === "/update-password";
+    location.pathname === "/updatePassword";
 
   return (
     <>
       {!isLoginPage && <NavBarContainer />}
       <Routes>
         <Route path="/recoverPassword" element={<RecoverPasswordContainer />} />
-        <Route path="/update-password" element={<UpdatePassword />} />
+        <Route path="/updatePassword" element={<UpdatePassword />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route
           path="/*"

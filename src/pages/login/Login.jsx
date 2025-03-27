@@ -49,6 +49,11 @@ export const Login = ({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error && (
+            <Typography color="white" align="center">
+              {error}
+            </Typography>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -59,11 +64,6 @@ export const Login = ({
           >
             LogIn
           </Button>
-          {error && (
-            <Typography color="error" align="center">
-              {error}
-            </Typography>
-          )}
           <Box
             sx={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
