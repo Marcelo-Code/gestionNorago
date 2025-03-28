@@ -5,10 +5,16 @@ import { MonthlyIncomes } from "./MonthyIncomes";
 import { monthFormat } from "../../utils/helpers";
 import { GeneralContext } from "../../context/GeneralContext";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 export const MonthlyIncomesContainer = () => {
   const [monthlyData, setMonthlyData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const { darkMode } = useContext(GeneralContext);
 
@@ -104,6 +110,7 @@ export const MonthlyIncomesContainer = () => {
     handleEndDateChange,
     startDate,
     endDate,
+    handleGoBack,
   };
 
   return <MonthlyIncomes {...monthlyIncomesContainerProps} />;

@@ -159,60 +159,43 @@ export const PricesList = (servicesListProps) => {
         {filteredPrices.map((price) => (
           <div
             key={price.id}
-            style={{ backgroundColor: darkMode ? darkColor : "white" }}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              height: editMode ? "200px" : "150px",
+            }}
             className="servicesPricesItem"
           >
-            <span
-              style={{
-                width: "100%",
-                textAlign: "center",
-                margin: "10px 0",
-                borderBottom: "1px solid  rgb(196, 217, 238",
-              }}
-            >
-              <b style={textShadow}>SERVICIO: </b>
+            <span className="servicesPricesItemName">
+              <span>{price.service_name}</span>
+              <span>{currencyFormat(price.service_price)}</span>
             </span>
-            {price.service_name}
 
-            <span
-              style={{
-                width: "100%",
-                textAlign: "center",
-                margin: "10px 0",
-                borderBottom: "1px solid rgb(196, 217, 238)",
-              }}
-            >
-              <b style={textShadow}>PRECIO: </b>
-            </span>
-            {currencyFormat(price.service_price)}
-
-            {active === "true" ? (
-              editMode ? (
-                <div className="pricesListActions">
-                  <Link onClick={() => handleDeletePrice(price.id)}>
-                    <DeleteIcon
-                      sx={{
-                        fontSize: "2em",
-                        margin: "5px",
-                        color: darkMode ? "white" : "#1976d2",
-                      }}
-                    />
-                  </Link>
-                  <Link to={`/prices/priceModification/${price.id}`}>
-                    <EditIcon
-                      sx={{
-                        fontSize: "2em",
-                        margin: "5px",
-                        color: darkMode ? "white" : "#1976d2",
-                      }}
-                    />
-                  </Link>
-                </div>
-              ) : (
-                <div className="pricesListActions" />
-              )
-            ) : (
-              <div className="pricesListActions">
+            {/* Modo activo y en edición */}
+            {active === "true" && editMode && (
+              <div className="servicesPricesListActions">
+                <Link onClick={() => handleDeletePrice(price.id)}>
+                  <DeleteIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+                <Link to={`/prices/priceModification/${price.id}`}>
+                  <EditIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+              </div>
+            )}
+            {/* Modo inactivo */}
+            {active === "false" && (
+              <div className="servicesPricesListActions">
                 <Link onClick={() => handleUndeletePrice(price.id)}>
                   <RestoreFromTrashIcon
                     sx={{

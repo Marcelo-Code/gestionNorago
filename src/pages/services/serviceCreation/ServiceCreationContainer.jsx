@@ -55,8 +55,16 @@ export const ServiceCreationContainer = () => {
       .then(([clientsResponse, pricesResponse]) => {
         console.log(clientsResponse);
         console.log(pricesResponse);
-        setClients(clientsResponse.data);
-        setPrices(pricesResponse.data);
+        setClients(
+          (clientsResponse.data = clientsResponse.data.filter(
+            (client) => client.active
+          ))
+        );
+        setPrices(
+          (pricesResponse.data = pricesResponse.data.filter(
+            (price) => price.active
+          ))
+        );
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));

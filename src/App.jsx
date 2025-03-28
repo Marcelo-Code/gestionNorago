@@ -23,10 +23,11 @@ import { PricesListContainer } from "./pages/prices/pricesList/PricesListContain
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
 import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesContainer";
-import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginContainer } from "./pages/login/LoggedInContainer";
 import { RecoverPasswordContainer } from "./pages/recoverPassword/RecoverPasswordContainer";
-import UpdatePassword from "./updatePassword/UpdatePassword";
+import { UpdatePasswordContainer } from "./pages/updatePassword/UpdatePasswordContainer";
+import { PageNotFoundContainer } from "./pages/pageNotFound/pageNotFoundContainer";
+import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 
 function App() {
   const { darkMode } = useContext(GeneralContext);
@@ -59,13 +60,14 @@ function AppContent() {
       {!isLoginPage && <NavBarContainer />}
       <Routes>
         <Route path="/recoverPassword" element={<RecoverPasswordContainer />} />
-        <Route path="/updatePassword" element={<UpdatePassword />} />
+        <Route path="/updatePassword" element={<UpdatePasswordContainer />} />
         <Route path="/login" element={<LoginContainer />} />
         <Route
           path="/*"
           element={
             <ProtectedRoute>
               <Routes>
+                <Route path="*" element={<PageNotFoundContainer />} />
                 <Route path="/" element={<HomeContainer />} />
                 <Route
                   path="/clients/clientsList"

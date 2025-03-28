@@ -34,6 +34,7 @@ export const confirmationAlert = async (message) => {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Si, estoy seguro",
+    cancelButtonText: "Cancelar",
     backdrop: false,
     customClass: {
       title: "alertTitle",

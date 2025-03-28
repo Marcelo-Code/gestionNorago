@@ -14,6 +14,7 @@ import "./monthlyIncomes.css";
 import { buttonColor, currencyFormat, darkColor } from "../../utils/helpers";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+import { Button } from "@mui/material";
 dayjs.locale("es");
 
 export const MonthlyIncomes = (monthlyIncomesContainerProps) => {
@@ -26,6 +27,7 @@ export const MonthlyIncomes = (monthlyIncomesContainerProps) => {
     handleEndDateChange,
     startDate,
     endDate,
+    handleGoBack,
   } = monthlyIncomesContainerProps;
 
   const textShadow = { textShadow: "1px 1px 1px gray" };
@@ -129,6 +131,19 @@ export const MonthlyIncomes = (monthlyIncomesContainerProps) => {
             </tbody>
           </table>
         </div>
+        <Button
+          variant="outlined"
+          sx={{
+            color: darkMode ? "white" : "#1976d2",
+            backgroundColor: darkMode ? darkColor : "white",
+            maxWidth: "600px",
+            width: "80%",
+            margin: "20px",
+          }}
+          onClick={handleGoBack}
+        >
+          Volver
+        </Button>
       </div>
     </LocalizationProvider>
   );

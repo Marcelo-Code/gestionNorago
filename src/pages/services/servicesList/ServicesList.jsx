@@ -181,7 +181,7 @@ export const ServicesList = (servicesListProps) => {
             </div>
             <div className="servicesPrice" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>PRECIO SERVICIO: </b>
-              {currencyFormat(service.prices.service_price)}
+              {currencyFormat(service.service_price)}
             </div>
             <div
               className="servicesAdditional"
