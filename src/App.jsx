@@ -26,7 +26,7 @@ import { MonthlyIncomesContainer } from "./pages/monthlyIncomes/MonthlyIncomesCo
 import { LoginContainer } from "./pages/login/LoggedInContainer";
 import { RecoverPasswordContainer } from "./pages/recoverPassword/RecoverPasswordContainer";
 import { UpdatePasswordContainer } from "./pages/updatePassword/UpdatePasswordContainer";
-import { PageNotFoundContainer } from "./pages/pageNotFound/pageNotFoundContainer";
+import { PageNotFoundContainer } from "./pages/pageNotFound/PageNotFoundContainer";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 
 function App() {
