@@ -65,7 +65,6 @@ export const PricesListContainer = () => {
 
   useEffect(() => {
     const activeValue = active === "true";
-    console.log(activeValue);
     setIsLoading(true);
     getPrices()
       .then((response) => {

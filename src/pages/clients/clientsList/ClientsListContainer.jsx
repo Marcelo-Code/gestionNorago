@@ -30,8 +30,12 @@ export const ClientsListContainer = () => {
 
   const DEFAULT_SORT_OPTIONS = [
     { value: "none", label: "Sin ordenar" },
-    { value: "alphabetical-asc", label: "Alfabético (A-Z)" },
-    { value: "alphabetical-desc", label: "Alfabético (Z-A)" },
+    { value: "alphabetical-asc", label: "Alfabético (A-Z)", name: "name" },
+    {
+      value: "alphabetical-desc",
+      label: "Alfabético (Z-A)",
+      name: "name",
+    },
     // { value: "numeric-asc", label: "Ingresos (Menor a Mayor)" },
     //{ value: "numeric-desc", label: "Ingresos (Mayor a Menor)" },
   ];

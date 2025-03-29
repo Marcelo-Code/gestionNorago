@@ -12,6 +12,7 @@ import { SearchFilterContainer } from "../../../layout/filter/SearchFilterContai
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { softUndeletePrice } from "../../../services/api/prices";
 import { Height } from "@mui/icons-material";
+import { name } from "dayjs/locale/es";
 
 export const PricesList = (servicesListProps) => {
   const {
@@ -50,15 +51,29 @@ export const PricesList = (servicesListProps) => {
 
   const DEFAULT_SORT_OPTIONS = [
     { value: "none", label: "Sin ordenar" },
-    { value: "alphabetical-asc", label: "Equipo (A-Z)" },
-    { value: "alphabetical-desc", label: "Equipo (Z-A)" },
-    { value: "numeric-asc", label: "Total Servicio (Menor a Mayor)" },
-    { value: "numeric-desc", label: "Total Servicio (Mayor a Menor)" },
-    { value: "date-asc", label: "Fecha (Más antigua a Más reciente)" },
-    { value: "date-desc", label: "Fecha (Más reciente a Más antigua)" },
+    {
+      value: "alphabetical-asc",
+      label: "Servicio (A-Z)",
+      name: "service_name",
+    },
+    {
+      value: "alphabetical-desc",
+      label: "Servicio (Z-A)",
+      name: "service_name",
+    },
+    {
+      value: "numeric-asc",
+      label: "Precio Servicio (Menor a Mayor)",
+      name: "service_price",
+    },
+    {
+      value: "numeric-desc",
+      label: "Precio Servicio (Mayor a Menor)",
+      name: "service_price",
+    },
   ];
 
-  const sortFields = ["device", "date", "total_price"];
+  const sortFields = ["service_name", "service_price"];
 
   const searchFilterContainerProps = {
     darkMode,
@@ -66,8 +81,9 @@ export const PricesList = (servicesListProps) => {
     lightColor,
     buttonColor,
     toggleSearchBar,
-    filteredPrices,
-    setFilteredPrices,
+    setFilteredClients: setFilteredPrices,
+
+    clients: prices,
     activeFilters,
     setActiveFilters,
     DEFAULT_STATUS_OPTIONS,
@@ -135,21 +151,19 @@ export const PricesList = (servicesListProps) => {
             }}
           >
             {/* Barra de búsqueda y filtros */}
-            {/* <SearchFilterContainer
-            {...searchFilterContainerProps}
-            clients={prices}
-            showSearchFilter={true}
-          /> */}
+            <SearchFilterContainer
+              {...searchFilterContainerProps}
+              showSearchFilter={true}
+            />
           </div>
         </div>
       )}
 
       {/* Contenedor de filter chips */}
-      {/* <SearchFilterContainer
+      <SearchFilterContainer
         {...searchFilterContainerProps}
-        clients={prices}
         showSearchFilter={false}
-      /> */}
+      />
 
       <div className="servicesPricesList">
         {filteredPrices.length === 0 && (

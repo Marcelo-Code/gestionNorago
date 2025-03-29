@@ -44,16 +44,38 @@ export const ServicesList = (servicesListProps) => {
   ];
 
   const DEFAULT_SORT_OPTIONS = [
-    { value: "none", label: "Sin ordenar" },
-    { value: "alphabetical-asc", label: "Equipo (A-Z)" },
-    { value: "alphabetical-desc", label: "Equipo (Z-A)" },
-    { value: "numeric-asc", label: "Total Servicio (Menor a Mayor)" },
-    { value: "numeric-desc", label: "Total Servicio (Mayor a Menor)" },
-    { value: "date-asc", label: "Fecha (Más antigua a Más reciente)" },
-    { value: "date-desc", label: "Fecha (Más reciente a Más antigua)" },
+    { value: "none", label: "Sin ordenar", name: "none" },
+    { value: "alphabetical-asc", label: "Equipo (A-Z)", name: "device" },
+    { value: "alphabetical-desc", label: "Equipo (Z-A)", name: "device" },
+    {
+      value: "numeric-asc",
+      label: "Total Servicio (Menor a Mayor)",
+      name: "total_price",
+    },
+    {
+      value: "numeric-desc",
+      label: "Total Servicio (Mayor a Menor)",
+      name: "total_price",
+    },
+    {
+      value: "date-asc",
+      label: "Fecha (Más antigua a Más reciente)",
+      name: "date",
+    },
+    {
+      value: "date-desc",
+      label: "Fecha (Más reciente a Más antigua)",
+      name: "date",
+    },
   ];
 
-  const sortFields = ["device", "date", "total_price"];
+  const sortFields = [
+    "device",
+    "additional",
+    "clients.name",
+    "clients.last_name",
+    "serial_number",
+  ];
 
   const searchFilterContainerProps = {
     darkMode,

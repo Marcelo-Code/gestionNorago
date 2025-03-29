@@ -10,6 +10,7 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
     buttonColor,
     toggleSearchBar,
     setFilteredClients,
+
     showSearchFilter,
     clients,
     activeFilters,
@@ -20,6 +21,8 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
     sortFields,
   } = searchFilterContainerProps;
 
+  // console.log(clients);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     status: "all",
@@ -28,6 +31,7 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
   });
 
   const [sortOption, setSortOption] = useState("none");
+  const [sortOptionName, setSortOptionName] = useState("none");
   // const [filteredClients, setFilteredClients] = useState(clients);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -66,86 +70,93 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
 
   // Filtra los clientes basados en búsqueda, filtros y ordenamiento
   const applyFilters = (
-    query,
-    currentFilters,
-    currentSort,
+    searchQuery,
+    filters,
+    sortOption,
+    sortOptionName,
     clients,
-    clientProps
+    sortFields
   ) => {
     const normalizeText = (text) =>
-      text
+      String(text || "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase();
 
+    const getNestedValue = (obj, prop) => {
+      return prop
+        .split(".")
+        .reduce((acc, part) => (acc ? acc[part] : undefined), obj);
+    };
+
     let result = clients.filter((client) =>
-      clientProps.some((prop) =>
-        normalizeText(client[prop]).includes(normalizeText(query))
+      sortFields.some((prop) =>
+        // normalizeText(client[prop]).includes(normalizeText(searchQuery))
+        normalizeText(getNestedValue(client, prop)).includes(
+          normalizeText(searchQuery)
+        )
       )
     );
+    console.log(sortFields);
+    console.log(result);
 
-    if (currentFilters.status !== "all") {
-      result = result.filter(
-        (client) => client.status === currentFilters.status
-      );
+    if (filters.status !== "all") {
+      result = result.filter((client) => client.status === filters.status);
     }
 
-    if (currentFilters.type !== "all") {
-      result = result.filter((client) => client.type === currentFilters.type);
+    if (filters.type !== "all") {
+      result = result.filter((client) => client.type === filters.type);
     }
 
-    console.log(currentSort);
-
-    if (currentSort !== "none") {
+    if (sortOption !== "none") {
       result.sort((a, b) => {
-        // Iterar sobre cada propiedad de clientProps y realizar la comparación
-        for (let i = 0; i < clientProps.length; i++) {
-          const prop = clientProps[i];
+        // Ordenamiento alfabético
+        if (sortOption.includes("alphabetical")) {
+          const comparison =
+            sortOption === "alphabetical-asc"
+              ? normalizeText(a[sortOptionName]).localeCompare(
+                  normalizeText(b[sortOptionName])
+                )
+              : normalizeText(b[sortOptionName]).localeCompare(
+                  normalizeText(a[sortOptionName])
+                );
 
-          // Ordenamiento alfabético
-          if (currentSort.includes("alphabetical")) {
-            const comparison =
-              currentSort === "alphabetical-asc"
-                ? normalizeText(a[prop]).localeCompare(normalizeText(b[prop]))
-                : normalizeText(b[prop]).localeCompare(normalizeText(a[prop]));
-
-            // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
-            if (comparison !== 0) {
-              return comparison;
-            }
+          // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
+          if (comparison !== 0) {
+            return comparison;
           }
-          // Ordenamiento numérico
-          else if (currentSort.includes("numeric")) {
-            const comparison =
-              currentSort === "numeric-asc"
-                ? a[prop] - b[prop]
-                : b[prop] - a[prop];
+        }
+        // Ordenamiento numérico
+        else if (sortOption.includes("numeric")) {
+          const comparison =
+            sortOption === "numeric-asc"
+              ? a[sortOptionName] - b[sortOptionName]
+              : b[sortOptionName] - a[sortOptionName];
 
-            // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
-            if (comparison !== 0) {
-              return comparison;
-            }
+          // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
+          if (comparison !== 0) {
+            return comparison;
           }
-          // Ordenamiento por fecha
-          else if (currentSort.includes("date")) {
-            const dateA = new Date(a[prop]);
-            const dateB = new Date(b[prop]);
+        }
+        // Ordenamiento por fecha
+        else if (sortOption.includes("date")) {
+          const dateA = new Date(a[sortOptionName]);
+          const dateB = new Date(b[sortOptionName]);
 
-            // Verifica que ambas fechas sean válidas
-            if (isNaN(dateA) || isNaN(dateB)) {
-              console.warn(
-                `Invalid date values for ${prop}: ${a[prop]}, ${b[prop]}`
-              );
-              return 0;
-            }
+          // Verifica que ambas fechas sean válidas
+          if (isNaN(dateA) || isNaN(dateB)) {
+            console.warn(
+              `Invalid date values for ${sortOptionName}: ${a[sortOptionName]}, ${b[sortOptionName]}`
+            );
+            return 0;
+          }
 
-            const comparison =
-              currentSort === "date-asc" ? dateA - dateB : dateB - dateA;
+          const comparison =
+            sortOption === "date-asc" ? dateA - dateB : dateB - dateA;
 
-            // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
-            if (comparison !== 0) {
-              return comparison;
-            }
+          // Si la comparación no es 0, entonces se retorna el resultado de esa comparación
+          if (comparison !== 0) {
+            return comparison;
           }
         }
 
@@ -154,7 +165,7 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
       });
     }
 
-    console.log(result);
+    // console.log(result);
 
     setFilteredClients(result);
   };
@@ -174,6 +185,8 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
   // Maneja cambios en el ordenamiento
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
+    setSortOptionName(event.target.name);
+    console.log(event.target.name);
     updateActiveFilters(filters, event.target.value);
   };
 
@@ -198,8 +211,15 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
 
   // Efecto para actualizar los clientes filtrados
   useEffect(() => {
-    applyFilters(searchQuery, filters, sortOption, clients, sortFields);
-  }, [searchQuery, filters, sortOption, clients]);
+    applyFilters(
+      searchQuery,
+      filters,
+      sortOption,
+      sortOptionName,
+      clients,
+      sortFields
+    );
+  }, [searchQuery, filters, sortOption, sortOptionName, clients]);
 
   const searchFilterProps = {
     darkMode,

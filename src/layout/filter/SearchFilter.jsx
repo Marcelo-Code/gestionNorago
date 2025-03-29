@@ -184,6 +184,7 @@ export const SearchFilter = ({
                     <FormControlLabel
                       key={option.value}
                       value={option.value}
+                      name={option.name}
                       control={
                         <Radio
                           sx={{
