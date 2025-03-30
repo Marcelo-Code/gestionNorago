@@ -75,6 +75,7 @@ export const ServicesList = (servicesListProps) => {
     "prices.service_name",
     "additional",
     "serial_number",
+    "total_price",
   ];
 
   const searchFilterContainerProps = {

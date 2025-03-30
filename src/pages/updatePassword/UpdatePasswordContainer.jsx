@@ -22,6 +22,8 @@ export const UpdatePasswordContainer = () => {
 
     const accessToken = parsedToken.access_token;
 
+    console.log(accessToken);
+
     if (!accessToken) {
       setError("Invalid access token.");
     }

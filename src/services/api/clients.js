@@ -12,7 +12,7 @@ export const getClients = async () => {
     // Combinar `name` y `last_name` en `full_name`
     const clientsWithFullName = data.map((client) => ({
       ...client,
-      full_name: `${client.name} ${client.last_name}`, // Concatenar y evitar espacios extra
+      full_name: `${client.name} ${client.last_name}`,
     }));
 
     return {

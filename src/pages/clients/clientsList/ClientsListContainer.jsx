@@ -29,11 +29,13 @@ export const ClientsListContainer = () => {
   ];
 
   const DEFAULT_SORT_OPTIONS = [
-    { value: "none", label: "Sin ordenar" },
-    { value: "alphabetical-asc", label: "Alfabético (A-Z)" },
-    { value: "alphabetical-desc", label: "Alfabético (Z-A)" },
-    // { value: "numeric-asc", label: "Ingresos (Menor a Mayor)" },
-    //{ value: "numeric-desc", label: "Ingresos (Mayor a Menor)" },
+    { value: "none", label: "Sin ordenar", name: "none" },
+    { value: "alphabetical-asc", label: "Nombre (A-Z)", name: "full_name" },
+    { value: "alphabetical-desc", label: "Nombre (Z-A)", name: "full_name" },
+    // { value: "alphabetical-asc", label: "Dirección (A-Z)", name: "address" },
+    // { value: "alphabetical-desc", label: "Dirección (Z-A)", name: "address" },
+    // { value: "alphabetical-asc", label: "email (A-Z)", name: "email" },
+    // { value: "alphabetical-desc", label: "email (Z-A)", name: "email" },
   ];
 
   const [filteredClients, setFilteredClients] = useState([]);
