@@ -12,7 +12,19 @@ export const getServices = async () => {
       .select(
         "*, clients:client_id(name, last_name), prices:service_price_id(service_name, service_price)"
       );
-    return { status: 201, message: "Servicios obtenidos con éxito", data };
+
+    const servicesWithFullName = data.map((service) => {
+      if (service.clients) {
+        service.clients.full_name = `${service.clients.name} ${service.clients.last_name}`;
+      }
+      return service;
+    });
+
+    return {
+      status: 201,
+      message: "Servicios obtenidos con éxito",
+      data: servicesWithFullName,
+    };
   } catch (error) {
     errorAlert("Error inesperado al obtener servicios");
     return {

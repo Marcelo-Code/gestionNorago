@@ -71,9 +71,9 @@ export const ServicesList = (servicesListProps) => {
 
   const sortFields = [
     "device",
+    "clients.full_name",
+    "prices.service_name",
     "additional",
-    "clients.name",
-    "clients.last_name",
     "serial_number",
   ];
 
@@ -180,7 +180,7 @@ export const ServicesList = (servicesListProps) => {
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>CLIENTE:</b>
-              {service.clients.name} {service.clients.last_name}
+              {service.clients.full_name}
             </div>
             <div className="servicesDate" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>FECHA: </b>

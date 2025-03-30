@@ -10,8 +10,6 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
     buttonColor,
     toggleSearchBar,
     setFilteredClients,
-
-    showSearchFilter,
     clients,
     activeFilters,
     setActiveFilters,
@@ -19,6 +17,7 @@ export const SearchFilterContainer = (searchFilterContainerProps) => {
     DEFAULT_TYPE_OPTIONS,
     DEFAULT_SORT_OPTIONS,
     sortFields,
+    showSearchFilter,
   } = searchFilterContainerProps;
 
   // console.log(clients);

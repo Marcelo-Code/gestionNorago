@@ -8,7 +8,18 @@ import { supabaseClient } from "../config/config.js";
 export const getClients = async () => {
   try {
     const { data } = await supabaseClient.from("clients").select("*");
-    return { status: 201, message: "Clientes obtenidos con éxito", data };
+
+    // Combinar `name` y `last_name` en `full_name`
+    const clientsWithFullName = data.map((client) => ({
+      ...client,
+      full_name: `${client.name} ${client.last_name}`, // Concatenar y evitar espacios extra
+    }));
+
+    return {
+      status: 201,
+      message: "Clientes obtenidos con éxito",
+      data: clientsWithFullName,
+    };
   } catch (error) {
     errorAlert("Error inesperado al obtener clientes");
     return {

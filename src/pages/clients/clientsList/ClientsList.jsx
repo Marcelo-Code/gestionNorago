@@ -36,7 +36,7 @@ export const ClientsList = (clientsListProps) => {
     showSearch,
   } = clientsListProps;
 
-  const sortFields = ["name", "last_name"];
+  const sortFields = ["full_name"];
 
   const searchFilterContainerProps = {
     darkMode,

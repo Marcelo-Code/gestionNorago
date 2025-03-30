@@ -12,7 +12,6 @@ import { SearchFilterContainer } from "../../../layout/filter/SearchFilterContai
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { softUndeletePrice } from "../../../services/api/prices";
 import { Height } from "@mui/icons-material";
-import { name } from "dayjs/locale/es";
 
 export const PricesList = (servicesListProps) => {
   const {
@@ -50,7 +49,7 @@ export const PricesList = (servicesListProps) => {
   ];
 
   const DEFAULT_SORT_OPTIONS = [
-    { value: "none", label: "Sin ordenar" },
+    { value: "none", label: "Sin ordenar", name: "none" },
     {
       value: "alphabetical-asc",
       label: "Servicio (A-Z)",
@@ -71,6 +70,8 @@ export const PricesList = (servicesListProps) => {
       label: "Precio Servicio (Mayor a Menor)",
       name: "service_price",
     },
+    // { value: "date-asc", label: "Fecha (Más antigua a Más reciente)" },
+    // { value: "date-desc", label: "Fecha (Más reciente a Más antigua)" },
   ];
 
   const sortFields = ["service_name", "service_price"];
@@ -82,7 +83,6 @@ export const PricesList = (servicesListProps) => {
     buttonColor,
     toggleSearchBar,
     setFilteredClients: setFilteredPrices,
-
     clients: prices,
     activeFilters,
     setActiveFilters,
