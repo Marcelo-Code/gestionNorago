@@ -19,9 +19,7 @@ export const RecoverPasswordContainer = () => {
     setSuccessMessage("");
 
     try {
-      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/updatePassword`,
-      });
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
 
       if (error) {
         setError(error.message);
