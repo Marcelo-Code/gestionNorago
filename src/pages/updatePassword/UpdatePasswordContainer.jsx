@@ -13,6 +13,8 @@ export const UpdatePasswordContainer = () => {
 
   const accessToken = searchParams.get("access_token");
 
+  console.log(searchParams);
+
   useEffect(() => {
     if (!accessToken) {
       setError("Invalid access token.");
