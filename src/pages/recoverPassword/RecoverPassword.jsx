@@ -60,7 +60,7 @@ export const RecoverPassword = ({
               {error}
             </Typography>
           )}
-          {!successMessage && (
+          {successMessage && (
             <>
               <Typography color="white" align="center">
                 {successMessage}
