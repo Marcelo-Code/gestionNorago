@@ -9,11 +9,8 @@ export const UpdatePasswordContainer = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
 
-  const accessToken = searchParams.get("access_token");
-
-  console.log(searchParams);
+  const accessToken = localStorage.getItem("access_token");
 
   useEffect(() => {
     if (!accessToken) {
