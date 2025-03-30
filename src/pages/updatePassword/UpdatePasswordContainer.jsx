@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { supabaseClient } from "../../services/config/config";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UpdatePassword } from "./UpdatePassword";
+import { X } from "@mui/icons-material";
 
 export const UpdatePasswordContainer = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -9,14 +10,22 @@ export const UpdatePasswordContainer = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-
-  const accessToken = localStorage.getItem("access_token");
+  const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
+    //Recupera el access token del localStorage
+    const accessTokenData = localStorage.getItem(
+      "sb-qkifydwkmkllnebiosiq-auth-token"
+    );
+    const parsedToken = JSON.parse(accessTokenData);
+    setAccessToken(parsedToken.access_token);
+
+    const accessToken = parsedToken.access_token;
+
     if (!accessToken) {
       setError("Invalid access token.");
     }
-  }, [accessToken]);
+  }, []);
 
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
