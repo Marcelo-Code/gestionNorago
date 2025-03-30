@@ -64,6 +64,11 @@ export const UpdatePassword = (updatePasswordProps) => {
               {error}
             </Typography>
           )}
+          {successMessage && (
+            <Typography color="white" align="center">
+              {successMessage}
+            </Typography>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -74,11 +79,6 @@ export const UpdatePassword = (updatePasswordProps) => {
           >
             Actualizar
           </Button>
-          {successMessage && (
-            <Typography color="primary" align="center">
-              {successMessage}
-            </Typography>
-          )}
         </Box>
       </Box>
     </Container>
