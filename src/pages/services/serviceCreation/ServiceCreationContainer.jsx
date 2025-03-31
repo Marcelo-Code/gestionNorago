@@ -21,6 +21,7 @@ export const ServiceCreationContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [clients, setClients] = useState([]);
   const [prices, setPrices] = useState([]);
+  const [modifiedFlag, setModifiedFlag] = useState(false);
   const { darkMode } = useContext(GeneralContext);
 
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export const ServiceCreationContainer = () => {
       console.log(formData);
       return updatedState;
     });
+    if (modifiedFlag === false) setModifiedFlag(true);
   };
 
   const handleSubmit = (e) => {
@@ -88,6 +90,7 @@ export const ServiceCreationContainer = () => {
     darkColor,
     lightColor,
     buttonColor,
+    modifiedFlag,
   };
 
   return <ServiceCreation {...serviceCreationProps} />;

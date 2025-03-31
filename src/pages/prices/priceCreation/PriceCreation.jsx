@@ -46,7 +46,7 @@ export const PriceCreation = (priceCreationProps) => {
           }}
         >
           <CardContent>
-            <form>
+            <form onSubmit={handleSubmit}>
               <Box display="flex" flexDirection="column" gap={2}>
                 <Box sx={{ width: "100%", backgroundColor: "white" }}>
                   <TextField
@@ -103,7 +103,6 @@ export const PriceCreation = (priceCreationProps) => {
                         width: { xs: "100%", sm: "48%" },
                       }}
                       startIcon={<SaveIcon />}
-                      onClick={(e) => handleSubmit(e)}
                       disabled={!modifiedFlag}
                     >
                       Guardar

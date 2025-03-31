@@ -46,7 +46,7 @@ export const ClientCreation = (clientCreationProps) => {
           }}
         >
           <CardContent>
-            <form onAbort={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <Box display="flex" flexDirection="column" gap={2}>
                 <Box sx={{ width: "100%", backgroundColor: "white" }}>
                   <TextField
