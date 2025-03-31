@@ -3,6 +3,7 @@ import { supabaseClient } from "../../services/config/config";
 import { useNavigate } from "react-router-dom";
 import { UpdatePassword } from "./UpdatePassword";
 import { X } from "@mui/icons-material";
+import { LoadingContainer } from "../../layout/loading/LoadingContainer";
 
 export const UpdatePasswordContainer = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -11,23 +12,28 @@ export const UpdatePasswordContainer = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    //Recupera el access token del localStorage
-    const accessTokenData = localStorage.getItem(
-      "sb-qkifydwkmkllnebiosiq-auth-token"
-    );
-    const parsedToken = JSON.parse(accessTokenData);
-    setAccessToken(parsedToken.access_token);
+    const checkToken = () => {
+      const tokenData = localStorage.getItem(
+        "sb-qkifydwkmkllnebiosiq-auth-token"
+      );
+      if (tokenData) {
+        const parsedToken = JSON.parse(tokenData);
+        setAccessToken(parsedToken.access_token);
+        setIsLoading(false);
+      } else {
+        setTimeout(checkToken, 100); // Esperar 100ms y volver a intentar
+      }
+    };
 
-    const accessToken = parsedToken.access_token;
-
-    console.log(accessToken);
+    checkToken();
 
     if (!accessToken) {
       setError("Invalid access token.");
     }
-  }, []);
+  }, [accessToken]);
 
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
@@ -61,6 +67,8 @@ export const UpdatePasswordContainer = () => {
       setError(err.message);
     }
   };
+
+  if (isLoading) return <LoadingContainer />;
 
   const updatePasswordProps = {
     newPassword,
