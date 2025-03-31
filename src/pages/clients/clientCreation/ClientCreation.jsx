@@ -46,7 +46,7 @@ export const ClientCreation = (clientCreationProps) => {
           }}
         >
           <CardContent>
-            <form>
+            <form onAbort={handleSubmit}>
               <Box display="flex" flexDirection="column" gap={2}>
                 <Box sx={{ width: "100%", backgroundColor: "white" }}>
                   <TextField
@@ -130,7 +130,6 @@ export const ClientCreation = (clientCreationProps) => {
                         width: { xs: "100%", sm: "48%" },
                       }}
                       startIcon={<SaveIcon />}
-                      onClick={(e) => handleSubmit(e)}
                       disabled={!modifiedFlag}
                     >
                       Guardar
