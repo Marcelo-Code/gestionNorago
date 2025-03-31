@@ -64,8 +64,9 @@
 .servicesPricesList {
   display: flex;
   justify-content: center;
-  width: 100%;
   flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px;
 }
 
 .servicesPricesItem {
@@ -91,13 +92,4 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-}
-
-.servicesPricesList {
-  font-family: sans-serif;
-  text-align: center;
-  width: 100%;
-  min-height: 80vh;
-  gap: 20px;
-  margin: 20px;
 }

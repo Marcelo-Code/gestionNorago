@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 import { currencyFormat } from "../../../utils/helpers";
 import { SearchFilterContainer } from "../../../layout/filter/SearchFilterContainer";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
-import { softUndeletePrice } from "../../../services/api/prices";
-import { Height } from "@mui/icons-material";
 
 export const PricesList = (servicesListProps) => {
   const {
@@ -224,6 +222,7 @@ export const PricesList = (servicesListProps) => {
           </div>
         ))}
       </div>
+
       <Button
         variant="outlined"
         sx={{

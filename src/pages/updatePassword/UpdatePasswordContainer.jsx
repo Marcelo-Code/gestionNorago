@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { supabaseClient } from "../../services/config/config";
 import { useNavigate } from "react-router-dom";
 import { UpdatePassword } from "./UpdatePassword";
-import { X } from "@mui/icons-material";
 import { LoadingContainer } from "../../layout/loading/LoadingContainer";
 
 export const UpdatePasswordContainer = () => {
