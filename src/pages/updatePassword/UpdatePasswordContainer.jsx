@@ -29,10 +29,6 @@ export const UpdatePasswordContainer = () => {
     };
 
     checkToken();
-
-    if (!accessToken) {
-      setError("Invalid access token.");
-    }
   }, [accessToken]);
 
   const handleUpdatePassword = async (e) => {
