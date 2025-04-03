@@ -8,6 +8,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import BuildIcon from "@mui/icons-material/Build";
 import { Button, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -35,6 +36,8 @@ export const ClientsList = (clientsListProps) => {
     DEFAULT_TYPE_OPTIONS,
     DEFAULT_STATUS_OPTIONS,
     showSearch,
+    active,
+    handleUndeleteClient,
   } = clientsListProps;
 
   const sortFields = ["full_name", "phone", "email", "address"];
@@ -67,61 +70,63 @@ export const ClientsList = (clientsListProps) => {
         style={{ color: darkMode ? "white" : "#1976d2" }}
         className="generalTitle"
       >
-        Clientes
+        {active === "true" ? "Clientes" : "Clientes Inactivos"}
       </h2>
-      <div
-        style={{
-          backgroundColor: darkMode ? darkColor : "white",
-        }}
-        className="generalBar"
-      >
+      {active === "true" && (
         <div
-          className={`editionBar ${
-            showSearch ? "editionBarHidden" : "editionBarShowed"
-          }`}
           style={{
             backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
           }}
+          className="generalBar"
         >
-          <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
-            EDICIÓN
-            <SwitchEditionMode
-              onChange={handleEditModeChange}
-              checked={editMode}
-            />
-          </span>
-          <Link to="/clients/clientCreation">
-            <Button variant={"contained"} startIcon={<PersonAddIcon />}>
-              Cliente
-            </Button>
-          </Link>
-
-          <IconButton
-            onClick={() => toggleSearchBar()}
-            size="small"
-            sx={{ color: darkMode ? "white" : buttonColor }}
+          <div
+            className={`editionBar ${
+              showSearch ? "editionBarHidden" : "editionBarShowed"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
           >
-            <SearchIcon />
-          </IconButton>
-        </div>
+            <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
+              EDICIÓN
+              <SwitchEditionMode
+                onChange={handleEditModeChange}
+                checked={editMode}
+              />
+            </span>
+            <Link to="/clients/clientCreation">
+              <Button variant={"contained"} startIcon={<PersonAddIcon />}>
+                Cliente
+              </Button>
+            </Link>
 
-        <div
-          className={`searchBar ${
-            showSearch ? "searchBarShowed" : "searchBarHidden"
-          }`}
-          style={{
-            backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
-          }}
-        >
-          {/* Barra de búsqueda y filtros */}
-          <SearchFilterContainer
-            {...searchFilterContainerProps}
-            showSearchFilter={true}
-          />
+            <IconButton
+              onClick={() => toggleSearchBar()}
+              size="small"
+              sx={{ color: darkMode ? "white" : buttonColor }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </div>
+
+          <div
+            className={`searchBar ${
+              showSearch ? "searchBarShowed" : "searchBarHidden"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
+          >
+            {/* Barra de búsqueda y filtros */}
+            <SearchFilterContainer
+              {...searchFilterContainerProps}
+              showSearchFilter={true}
+            />
+          </div>
         </div>
-      </div>
+      )}
       {/* Contenedor de filter chips */}
       <SearchFilterContainer
         {...searchFilterContainerProps}
@@ -175,23 +180,23 @@ export const ClientsList = (clientsListProps) => {
                 {client.email}
               </a>
             </div>
-            {!editMode ? (
-              <Link
-                className="clientsServiceButton"
-                to={`/services/servicesList/${client.id}`}
-              >
-                <Button
-                  startIcon={<BuildIcon />}
-                  variant="outlined"
-                  sx={{
-                    color: darkMode ? "white" : buttonColor,
-                    borderColor: darkMode ? "white" : buttonColor,
-                  }}
-                >
-                  Ver Servicios
-                </Button>
-              </Link>
-            ) : (
+            {active === "true" && !editMode && (
+              <div className="clientsServiceButton">
+                <Link to={`/services/servicesList/${client.id}`}>
+                  <Button
+                    startIcon={<BuildIcon />}
+                    variant="outlined"
+                    sx={{
+                      color: darkMode ? "white" : buttonColor,
+                      borderColor: darkMode ? "white" : buttonColor,
+                    }}
+                  >
+                    Ver Servicios
+                  </Button>
+                </Link>
+              </div>
+            )}
+            {active === "true" && editMode && (
               <div className="clientsListActions">
                 <Link onClick={() => handleDeleteClient(client.id)}>
                   <DeleteIcon
@@ -204,6 +209,20 @@ export const ClientsList = (clientsListProps) => {
                 </Link>
                 <Link to={`/clients/clientModification/${client.id}`}>
                   <EditIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+              </div>
+            )}
+
+            {active === "false" && (
+              <div className="clientsListActions">
+                <Link onClick={() => handleUndeleteClient(client.id)}>
+                  <RestoreFromTrashIcon
                     sx={{
                       fontSize: "2em",
                       margin: "5px",

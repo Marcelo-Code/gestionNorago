@@ -70,12 +70,8 @@ function AppContent() {
                 <Route path="*" element={<PageNotFoundContainer />} />
                 <Route path="/" element={<HomeContainer />} />
                 <Route
-                  path="/clients/clientsList"
+                  path="/clients/clientsList/active/:active"
                   element={<ClientsListContainer />}
-                />
-                <Route
-                  path="/clients/inactiveClientsList"
-                  element={<InactiveClientsListContainer />}
                 />
                 <Route
                   path="/clients/clientCreation"
@@ -106,7 +102,7 @@ function AppContent() {
                   element={<ServiceModificationContainer />}
                 />
                 <Route
-                  path="/prices/pricesList/:active"
+                  path="/prices/pricesList/active/:active"
                   element={<PricesListContainer />}
                 />
                 <Route

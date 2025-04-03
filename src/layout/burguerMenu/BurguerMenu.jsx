@@ -32,7 +32,7 @@ export const BurguerMenu = (burguerMenuProps) => {
       <div className="bm-menu-title">GESTIÓN NORAGO</div>
       <div className="bm-menu">
         <ul className="bm-item-list">
-          <Link to={"/clients/clientsList"} onClick={closeMenu}>
+          <Link to={"/clients/clientsList/active/true"} onClick={closeMenu}>
             <li className="bm-item">
               <PersonIcon /> Clientes
             </li>
@@ -44,7 +44,10 @@ export const BurguerMenu = (burguerMenuProps) => {
             </li>
           </Link>
 
-          <Link to={`/prices/pricesList/true`} onClick={closeMenu}>
+          <Link
+            to={`/prices/pricesList/activeFilters/true`}
+            onClick={closeMenu}
+          >
             <li className="bm-item">
               <AttachMoneyIcon /> Precios
             </li>

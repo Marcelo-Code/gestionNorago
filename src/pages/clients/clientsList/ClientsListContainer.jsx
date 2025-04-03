@@ -1,15 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./ClientsList.css";
 import { ClientsList } from "./ClientsList";
-import { getClients, softDeleteClient } from "../../../services/api/clients";
+import {
+  getClients,
+  softDeleteClient,
+  softUndeleteClient,
+} from "../../../services/api/clients";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor, lightColor, buttonColor } from "../../../utils/helpers";
 import { ErrorContainer } from "../../../layout/error/ErrorContainer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ClientsListContainer = () => {
   const { darkMode } = useContext(GeneralContext);
+
+  const { active } = useParams();
 
   //Variables y constantes para el filtro de busqueda
   //-------------------------------------------------
@@ -77,16 +83,32 @@ export const ClientsListContainer = () => {
       .catch((error) => console.log(error));
   };
 
+  //Función para restaurar un cliente borrado
+  const handleUndeleteClient = (clientId) => {
+    softUndeleteClient(clientId)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setUpdateList(!updateList);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   //Importar clientes de la base de datos
   //------------------------------------
   const [clients, setClients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    const activeValue = active === "true";
+
     setIsLoading(true);
     getClients()
       .then((response) => {
         console.log(response);
-        response.data = response.data.filter((client) => client.active);
+        response.data = response.data.filter(
+          (price) => price.active === activeValue
+        );
         setClients(response.data);
 
         //Se inicializa el filtro con todos los clientes
@@ -97,7 +119,7 @@ export const ClientsListContainer = () => {
         return <ErrorContainer />;
       })
       .finally(() => setIsLoading(false));
-  }, [updateList]);
+  }, [updateList, active]);
 
   if (isLoading) return <LoadingContainer />;
 
@@ -121,6 +143,8 @@ export const ClientsListContainer = () => {
     DEFAULT_TYPE_OPTIONS,
     DEFAULT_STATUS_OPTIONS,
     showSearch,
+    active,
+    handleUndeleteClient,
   };
 
   return <ClientsList {...clientsListProps} />;

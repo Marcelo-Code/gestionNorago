@@ -76,7 +76,10 @@ export const PricesListContainer = () => {
         setPrices(response.data);
         setFilteredPrices(response.data);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error);
+        return <ErrorContainer />;
+      })
       .finally(() => setIsLoading(false));
   }, [updateList, active]);
 
