@@ -6,9 +6,8 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import "./clientCreation.css";
+import "../../../assets/global.css";
 import SaveIcon from "@mui/icons-material/Save";
-import { dark } from "@mui/material/styles/createPalette";
 
 export const ClientCreation = (clientCreationProps) => {
   const {
@@ -24,9 +23,9 @@ export const ClientCreation = (clientCreationProps) => {
     buttonColor,
   } = clientCreationProps;
   return (
-    <div className="clientCreationContainer">
+    <div className="generalContainer">
       <h3
-        className="clientCreationTitle"
+        className="generalTitle"
         style={{ color: darkMode ? "white" : buttonColor }}
       >
         Nuevo Cliente

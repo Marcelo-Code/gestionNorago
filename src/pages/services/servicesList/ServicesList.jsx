@@ -1,5 +1,6 @@
 import React from "react";
 import "./servicesList.css";
+import "../../../assets/global.css";
 import { SwitchEditionMode } from "../../../layout/switchEditionMode/SwitchEditionMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -99,17 +100,17 @@ export const ServicesList = (servicesListProps) => {
   return (
     <div
       style={{ color: darkMode ? "white" : "black" }}
-      className="servicesListContainer"
+      className="generalContainer"
     >
       <h2
         style={{ color: darkMode ? "white" : "#1976d2" }}
-        className="servicesListTitle"
+        className="generalTitle"
       >
         Servicios
       </h2>
       <div
         style={{ backgroundColor: darkMode ? darkColor : "white" }}
-        className="servicesListBar"
+        className="generalBar"
       >
         <div
           className={`editionBar ${
@@ -166,7 +167,7 @@ export const ServicesList = (servicesListProps) => {
         showSearchFilter={false}
       />
 
-      <div className="servicesList">
+      <div className="generalList">
         {filteredClients.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
@@ -252,19 +253,21 @@ export const ServicesList = (servicesListProps) => {
           </div>
         ))}
       </div>
-      <Button
-        variant="outlined"
-        sx={{
-          color: darkMode ? "white" : "#1976d2",
-          backgroundColor: darkMode ? darkColor : "white",
-          maxWidth: "600px",
-          width: "80%",
-          margin: "20px",
-        }}
-        onClick={handleGoBack}
-      >
-        Volver
-      </Button>
+      <div className="buttonBackContainer">
+        <Button
+          variant="outlined"
+          sx={{
+            color: darkMode ? "white" : "#1976d2",
+            backgroundColor: darkMode ? darkColor : "white",
+            maxWidth: "600px",
+            width: "80%",
+            margin: "20px",
+          }}
+          onClick={handleGoBack}
+        >
+          Volver
+        </Button>
+      </div>
     </div>
   );
 };

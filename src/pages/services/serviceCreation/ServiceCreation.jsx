@@ -6,7 +6,7 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import "./serviceCreation.css";
+import "../../../assets/global.css";
 import SaveIcon from "@mui/icons-material/Save";
 import { OptionSelect } from "../../../layout/select/Select";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
@@ -32,9 +32,9 @@ export const ServiceCreation = (serviceCreationProps) => {
   } = serviceCreationProps;
 
   return (
-    <div className="clientCreationContainer">
+    <div className="generalContainer">
       <h5
-        className="clientCreationTitle"
+        className="generalTitle"
         style={{ color: darkMode ? "white" : buttonColor }}
       >
         Nuevo Servicio

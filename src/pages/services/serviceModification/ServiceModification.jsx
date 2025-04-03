@@ -6,7 +6,7 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import "./serviceModification.css";
+import "../../../assets/global.css";
 import SaveIcon from "@mui/icons-material/Save";
 import { OptionSelect } from "../../../layout/select/Select";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
@@ -28,9 +28,9 @@ export const ServiceModification = (serviceModificationProps) => {
   } = serviceModificationProps;
 
   return (
-    <div className="serviceModificationContainer">
+    <div className="generalContainer">
       <h5
-        className="serviceModificationTitle"
+        className="generalTitle"
         style={{ color: darkMode ? "white" : buttonColor }}
       >
         Modificar Servicio

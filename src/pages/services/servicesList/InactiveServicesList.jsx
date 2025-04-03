@@ -42,7 +42,7 @@ export const InactiveServicesList = (inactiveServicesListProps) => {
               style={{ marginBottom: "10px" }}
             >
               <b style={textShadow}>CLIENTE:</b>
-              {inactiveService.clients.name} {inactiveService.clients.last_name}
+              {inactiveService.clients.full_name}
             </div>
             <div
               className="inactiveServicesDate"
@@ -62,15 +62,22 @@ export const InactiveServicesList = (inactiveServicesListProps) => {
               className="inactiveServicesText"
               style={{ marginBottom: "10px" }}
             >
-              <b style={textShadow}>DETALLE SERVICIO: </b>
-              {inactiveService.service_text}
+              <b style={textShadow}>SERVICIO: </b>
+              {inactiveService.prices.service_name}
             </div>
             <div
-              className="inactiveServicesInputs"
+              className="inactiveServicesPrice"
               style={{ marginBottom: "10px" }}
             >
-              <b style={textShadow}>REPUESTOS UTILIZADOS:</b>
-              {inactiveService.inputs}
+              <b style={textShadow}>PRECIO SERVICIO: </b>
+              {inactiveService.service_price}
+            </div>
+            <div
+              className="inactiveServicesAdditional"
+              style={{ marginBottom: "10px" }}
+            >
+              <b style={textShadow}>ADICIONAL:</b>
+              {inactiveService.additional}
             </div>
             <div
               className="inactiveServicesSerialNumber"
@@ -80,11 +87,11 @@ export const InactiveServicesList = (inactiveServicesListProps) => {
               {inactiveService.serial_number}
             </div>
             <div
-              className="inactiveServicesInputsPrice"
+              className="inactiveServicesAddionalsPrice"
               style={{ marginBottom: "10px" }}
             >
-              <b style={textShadow}>PRECIO REPUESTOS: </b>
-              {currencyFormat(inactiveService.inputs_price)}
+              <b style={textShadow}>PRECIO ADICIONAL: </b>
+              {currencyFormat(inactiveService.additional_price)}
             </div>
             <div
               className="inactiveServicesTotalPrice"

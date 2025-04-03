@@ -6,7 +6,7 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import "./priceCreation.css";
+import "../../../assets/global.css";
 import SaveIcon from "@mui/icons-material/Save";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
@@ -24,9 +24,9 @@ export const PriceCreation = (priceCreationProps) => {
     buttonColor,
   } = priceCreationProps;
   return (
-    <div className="priceCreationContainer">
+    <div className="generalContainer">
       <h3
-        className="priceCreationTitle"
+        className="generalTitle"
         style={{ color: darkMode ? "white" : buttonColor }}
       >
         Nuevo Precio

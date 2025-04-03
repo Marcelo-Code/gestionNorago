@@ -3,35 +3,6 @@
   src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
 }
 
-.notFoundTitle {
-  margin: 100px;
-}
-
-.inactiveClientsListContainer {
-  font-family: sans-serif;
-  text-align: center;
-  width: 100%;
-  min-height: 80vh;
-}
-
-.inactiveClientsListTitle {
-  font-family: "horndon";
-  font-size: 2.5em;
-  text-shadow: 0 0 20px white;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  letter-spacing: 3px;
-}
-
-.inactiveClientsList {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .inactiveClientsItem {
   margin: 10px;
   padding: 10px;
@@ -40,11 +11,10 @@
   padding: 20px;
   box-shadow: 0 0 10px black;
   border-radius: 10px;
-
+  font-family: Arial, Helvetica, sans-serif;
   gap: 15px;
   max-width: 600px;
   width: 80%;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto auto;

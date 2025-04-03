@@ -3,34 +3,9 @@
   src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
 }
 
-.servicesListContainer {
-  font-family: sans-serif;
-  text-align: center;
-  width: 100%;
-  min-height: 80vh;
-}
-
-.servicesListTitle {
-  font-family: "horndon";
-  font-size: 2.5em;
-  color: steelblue;
-  text-shadow: 0 0 20px white;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  letter-spacing: 3px;
-}
-
-.servicesList {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .servicesItem {
   margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   padding: 10px;
   border-bottom: 1px solid #eee;
   background-color: white;
@@ -168,42 +143,8 @@
   text-decoration: underline;
 }
 
-.servicesListBar {
-  width: 100%;
-  padding: 35px;
-  box-shadow: 0 0 10px black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
 .servicesListActions {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.editionBarHidden,
-.searchBarHidden {
-  transform: translateX(-100%);
-  z-index: 1;
-}
-
-.editionBarShowed,
-.searchBarShowed {
-  transform: translateX(0%);
-  z-index: 2;
-}
-
-.searchBar,
-.editionBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  position: absolute;
-  inset: 0;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./pricesList.css";
+import "../../../assets/global.css";
 import { SwitchEditionMode } from "../../../layout/switchEditionMode/SwitchEditionMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -95,18 +96,18 @@ export const PricesList = (servicesListProps) => {
   return (
     <div
       style={{ color: darkMode ? "white" : "black" }}
-      className="pricesListContainer"
+      className="generalContainer"
     >
       <h2
         style={{ color: darkMode ? "white" : "#1976d2" }}
-        className="pricesListTitle"
+        className="generalTitle"
       >
         {active === "true" ? "Precios Servicios" : "Precios Inactivos"}
       </h2>
       {active === "true" && (
         <div
           style={{ backgroundColor: darkMode ? darkColor : "white" }}
-          className="pricesListBar"
+          className="generalBar"
         >
           <div
             className={`editionBar ${
@@ -163,7 +164,7 @@ export const PricesList = (servicesListProps) => {
         showSearchFilter={false}
       />
 
-      <div className="servicesPricesList">
+      <div className="generalList">
         {filteredPrices.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
@@ -184,7 +185,7 @@ export const PricesList = (servicesListProps) => {
 
             {/* Modo activo y en edición */}
             {active === "true" && editMode && (
-              <div className="servicesPricesListActions">
+              <div className="generalActions">
                 <Link onClick={() => handleDeletePrice(price.id)}>
                   <DeleteIcon
                     sx={{
@@ -207,7 +208,7 @@ export const PricesList = (servicesListProps) => {
             )}
             {/* Modo inactivo */}
             {active === "false" && (
-              <div className="servicesPricesListActions">
+              <div className="generalActions">
                 <Link onClick={() => handleUndeletePrice(price.id)}>
                   <RestoreFromTrashIcon
                     sx={{
@@ -223,19 +224,21 @@ export const PricesList = (servicesListProps) => {
         ))}
       </div>
 
-      <Button
-        variant="outlined"
-        sx={{
-          color: darkMode ? "white" : "#1976d2",
-          backgroundColor: darkMode ? darkColor : "white",
-          maxWidth: "600px",
-          width: "80%",
-          margin: "20px",
-        }}
-        onClick={handleGoBack}
-      >
-        Volver
-      </Button>
+      <div className="buttonBackContainer">
+        <Button
+          variant="outlined"
+          sx={{
+            color: darkMode ? "white" : "#1976d2",
+            backgroundColor: darkMode ? darkColor : "white",
+            maxWidth: "600px",
+            width: "80%",
+            margin: "20px",
+          }}
+          onClick={handleGoBack}
+        >
+          Volver
+        </Button>
+      </div>
     </div>
   );
 };

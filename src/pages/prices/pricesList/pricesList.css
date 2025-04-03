@@ -3,73 +3,9 @@
   src: url("/fonts/horndonBeckerRegular.ttf") format("truetype");
 }
 
-.pricesListContainer {
+.servicesPricesItem {
   font-family: sans-serif;
   text-align: center;
-  width: 100%;
-  min-height: 80vh;
-}
-
-.pricesListTitle {
-  font-family: "horndon";
-  font-size: 2.5em;
-  color: steelblue;
-  text-shadow: 0 0 20px white;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  letter-spacing: 3px;
-}
-
-.pricesListBar {
-  width: 100%;
-  padding: 35px;
-  box-shadow: 0 0 10px black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-.pricesListActions {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.editionBarHidden,
-.searchBarHidden {
-  transform: translateX(-100%);
-  z-index: 1;
-}
-
-.editionBarShowed,
-.searchBarShowed {
-  transform: translateX(0%);
-  z-index: 2;
-}
-
-.searchBar,
-.editionBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  position: absolute;
-  inset: 0;
-}
-
-.servicesPricesList {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 20px;
-}
-
-.servicesPricesItem {
   width: 310px;
   display: flex;
   flex-direction: column;
@@ -85,11 +21,4 @@
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;
-}
-
-.servicesPricesListActions {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
 }

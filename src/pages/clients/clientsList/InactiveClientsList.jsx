@@ -1,5 +1,7 @@
 import React from "react";
 import "./inactiveClientsList.css";
+import "./clientsList.css";
+import "../../../assets/global.css";
 import PersonIcon from "@mui/icons-material/Person";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -20,16 +22,16 @@ export const InactiveClientsList = (clientsListProps) => {
   return (
     <div
       style={{ color: darkMode ? "white" : "black" }}
-      className="inactiveClientsListContainer"
+      className="generalContainer"
     >
       <h2
         style={{ color: darkMode ? "white" : "#1976d2" }}
-        className="inactiveClientsListTitle"
+        className="generalTitle"
       >
         Clientes Inactivos
       </h2>
 
-      <div className="inactiveClientsList">
+      <div className="generalList">
         {inactiveClients.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
@@ -91,19 +93,21 @@ export const InactiveClientsList = (clientsListProps) => {
           </div>
         ))}
       </div>
-      <Button
-        variant="outlined"
-        sx={{
-          color: darkMode ? "white" : "#1976d2",
-          backgroundColor: darkMode ? darkColor : "white",
-          maxWidth: "600px",
-          width: "80%",
-          margin: "20px",
-        }}
-        onClick={handleGoBack}
-      >
-        Volver
-      </Button>
+      <div className="buttonBackContainer">
+        <Button
+          variant="outlined"
+          sx={{
+            color: darkMode ? "white" : "#1976d2",
+            backgroundColor: darkMode ? darkColor : "white",
+            maxWidth: "600px",
+            width: "80%",
+            margin: "20px",
+          }}
+          onClick={handleGoBack}
+        >
+          Volver
+        </Button>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import "./clientModification.css";
+import "../../../assets/global.css";
 import SaveIcon from "@mui/icons-material/Save";
 
 export const ClientModification = (clientModificationProps) => {
@@ -24,9 +24,9 @@ export const ClientModification = (clientModificationProps) => {
   } = clientModificationProps;
 
   return (
-    <div className="clientModificationContainer">
+    <div className="generalContainer">
       <h3
-        className="clientModificationTitle"
+        className="generalTitle"
         style={{ color: darkMode ? "white" : buttonColor }}
       >
         Modificar Cliente

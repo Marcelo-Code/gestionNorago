@@ -1,4 +1,5 @@
 import "./ClientsList.css";
+import "../../../assets/global.css";
 import { SwitchEditionMode } from "../../../layout/switchEditionMode/SwitchEditionMode";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -60,11 +61,11 @@ export const ClientsList = (clientsListProps) => {
   return (
     <div
       style={{ color: darkMode ? "white" : "black" }}
-      className="clientsListContainer"
+      className="generalContainer"
     >
       <h2
         style={{ color: darkMode ? "white" : "#1976d2" }}
-        className="clientsListTitle"
+        className="generalTitle"
       >
         Clientes
       </h2>
@@ -72,7 +73,7 @@ export const ClientsList = (clientsListProps) => {
         style={{
           backgroundColor: darkMode ? darkColor : "white",
         }}
-        className="clientsListBar"
+        className="generalBar"
       >
         <div
           className={`editionBar ${
@@ -127,7 +128,7 @@ export const ClientsList = (clientsListProps) => {
         showSearchFilter={false}
       />
 
-      <div className="clientsList">
+      <div className="generalList">
         {filteredClients.length === 0 && (
           <h2 className="notFoundTitle">No se encontraron registros</h2>
         )}
@@ -175,23 +176,21 @@ export const ClientsList = (clientsListProps) => {
               </a>
             </div>
             {!editMode ? (
-              <div className="clientsServiceButton">
-                <Link
-                  to={`/services/servicesList/${client.id}`}
-                  style={{ width: "100%" }}
+              <Link
+                className="clientsServiceButton"
+                to={`/services/servicesList/${client.id}`}
+              >
+                <Button
+                  startIcon={<BuildIcon />}
+                  variant="outlined"
+                  sx={{
+                    color: darkMode ? "white" : buttonColor,
+                    borderColor: darkMode ? "white" : buttonColor,
+                  }}
                 >
-                  <Button
-                    startIcon={<BuildIcon />}
-                    variant="outlined"
-                    sx={{
-                      color: darkMode ? "white" : buttonColor,
-                      borderColor: darkMode ? "white" : buttonColor,
-                    }}
-                  >
-                    Ver Servicios
-                  </Button>
-                </Link>
-              </div>
+                  Ver Servicios
+                </Button>
+              </Link>
             ) : (
               <div className="clientsListActions">
                 <Link onClick={() => handleDeleteClient(client.id)}>
@@ -217,19 +216,21 @@ export const ClientsList = (clientsListProps) => {
           </div>
         ))}
       </div>
-      <Button
-        variant="outlined"
-        sx={{
-          color: darkMode ? "white" : "#1976d2",
-          backgroundColor: darkMode ? darkColor : "white",
-          maxWidth: "600px",
-          width: "80%",
-          margin: "20px",
-        }}
-        onClick={handleGoBack}
-      >
-        Volver
-      </Button>
+      <div className="buttonBackContainer">
+        <Button
+          variant="outlined"
+          sx={{
+            color: darkMode ? "white" : "#1976d2",
+            backgroundColor: darkMode ? darkColor : "white",
+            maxWidth: "600px",
+            width: "80%",
+            margin: "20px",
+          }}
+          onClick={handleGoBack}
+        >
+          Volver
+        </Button>
+      </div>
     </div>
   );
 };
