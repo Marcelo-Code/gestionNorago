@@ -38,16 +38,13 @@ export const BurguerMenu = (burguerMenuProps) => {
             </li>
           </Link>
 
-          <Link to={"/services/servicesList"} onClick={closeMenu}>
+          <Link to={"/services/servicesList/active/true"} onClick={closeMenu}>
             <li className="bm-item">
               <BuildIcon /> Servicios
             </li>
           </Link>
 
-          <Link
-            to={`/prices/pricesList/activeFilters/true`}
-            onClick={closeMenu}
-          >
+          <Link to={`/prices/pricesList/active/true`} onClick={closeMenu}>
             <li className="bm-item">
               <AttachMoneyIcon /> Precios
             </li>

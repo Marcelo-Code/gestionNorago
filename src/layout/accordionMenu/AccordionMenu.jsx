@@ -51,7 +51,10 @@ export default function AccordionMenu({
                 <PersonIcon /> Clientes{" "}
               </li>{" "}
             </Link>{" "}
-            <Link to={"/services/inactiveServicesList"} onClick={closeMenu}>
+            <Link
+              to={"/services/servicesList/active/false"}
+              onClick={closeMenu}
+            >
               {" "}
               <li className="accordionItem">
                 <BuildIcon /> Servicios{" "}

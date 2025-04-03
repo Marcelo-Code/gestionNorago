@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ServicesList } from "./ServicesList";
-import { getServices, softDeleteService } from "../../../services/api/services";
+import {
+  getServices,
+  softDeleteService,
+  softUndeleteService,
+} from "../../../services/api/services";
 import { LoadingContainer } from "../../../layout/loading/LoadingContainer";
 import { GeneralContext } from "../../../context/GeneralContext";
 import { darkColor, buttonColor, lightColor } from "../../../utils/helpers";
@@ -12,7 +16,7 @@ export const ServicesListContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [updateList, setUpdateList] = useState(false);
   const { darkMode } = useContext(GeneralContext);
-  const { clientId = null } = useParams();
+  const { clientId = null, active } = useParams();
 
   const [filteredClients, setFilteredClients] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
@@ -38,6 +42,17 @@ export const ServicesListContainer = () => {
       .catch((error) => console.log(error));
   };
 
+  const handleUndeleteService = (clientId) => {
+    softUndeleteService(clientId)
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setUpdateList(!updateList);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   // Alternar entre barra de edición y barra de búsqueda
   //----------------------------------------------------
 
@@ -48,11 +63,15 @@ export const ServicesListContainer = () => {
   };
 
   useEffect(() => {
+    const activeValue = active === "true";
+
     setIsLoading(true);
     getServices()
       .then((response) => {
         console.log(response);
-        response.data = response.data.filter((service) => service.active);
+        response.data = response.data.filter(
+          (price) => price.active === activeValue
+        );
         if (clientId)
           response.data = response.data.filter(
             (service) => service.client_id === parseInt(clientId)
@@ -62,7 +81,7 @@ export const ServicesListContainer = () => {
       })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
-  }, [updateList, clientId]);
+  }, [updateList, clientId, active]);
 
   if (isLoading) return <LoadingContainer />;
 
@@ -82,6 +101,8 @@ export const ServicesListContainer = () => {
     filteredClients,
     setActiveFilters,
     activeFilters,
+    active,
+    handleUndeleteService,
   };
 
   return <ServicesList {...servicesListProps} />;

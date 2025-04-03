@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 import { Button, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { currencyFormat, dateFormat } from "../../../utils/helpers";
@@ -28,6 +29,8 @@ export const ServicesList = (servicesListProps) => {
     filteredClients,
     setActiveFilters,
     activeFilters,
+    active,
+    handleUndeleteService,
   } = servicesListProps;
 
   const DEFAULT_STATUS_OPTIONS = [
@@ -106,60 +109,62 @@ export const ServicesList = (servicesListProps) => {
         style={{ color: darkMode ? "white" : "#1976d2" }}
         className="generalTitle"
       >
-        Servicios
+        {active === "true" ? "Servicios" : "Servicios Inactivos"}
       </h2>
-      <div
-        style={{ backgroundColor: darkMode ? darkColor : "white" }}
-        className="generalBar"
-      >
+      {active === "true" && (
         <div
-          className={`editionBar ${
-            showSearch ? "editionBarHidden" : "editionBarShowed"
-          }`}
-          style={{
-            backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
-          }}
+          style={{ backgroundColor: darkMode ? darkColor : "white" }}
+          className="generalBar"
         >
-          <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
-            EDICIÓN
-            <SwitchEditionMode
-              onChange={handleEditModeChange}
-              checked={editMode}
-            />
-          </span>
-          <Link to="/services/serviceCreation">
-            <Button variant={"contained"} startIcon={<AddIcon />}>
-              Servicio
-            </Button>
-          </Link>
-
-          <IconButton
-            onClick={() => toggleSearchBar()}
-            size="small"
-            sx={{ color: darkMode ? "white" : buttonColor }}
+          <div
+            className={`editionBar ${
+              showSearch ? "editionBarHidden" : "editionBarShowed"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
           >
-            <SearchIcon />
-          </IconButton>
-        </div>
+            <span style={{ fontSize: "0.9em", verticalAlign: "middle" }}>
+              EDICIÓN
+              <SwitchEditionMode
+                onChange={handleEditModeChange}
+                checked={editMode}
+              />
+            </span>
+            <Link to="/services/serviceCreation">
+              <Button variant={"contained"} startIcon={<AddIcon />}>
+                Servicio
+              </Button>
+            </Link>
 
-        <div
-          className={`searchBar ${
-            showSearch ? "searchBarShowed" : "searchBarHidden"
-          }`}
-          style={{
-            backgroundColor: darkMode ? darkColor : "white",
-            transition: "transform 300ms ease-in-out",
-          }}
-        >
-          {/* Barra de búsqueda y filtros */}
-          <SearchFilterContainer
-            {...searchFilterContainerProps}
-            clients={services}
-            showSearchFilter={true}
-          />
+            <IconButton
+              onClick={() => toggleSearchBar()}
+              size="small"
+              sx={{ color: darkMode ? "white" : buttonColor }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </div>
+
+          <div
+            className={`searchBar ${
+              showSearch ? "searchBarShowed" : "searchBarHidden"
+            }`}
+            style={{
+              backgroundColor: darkMode ? darkColor : "white",
+              transition: "transform 300ms ease-in-out",
+            }}
+          >
+            {/* Barra de búsqueda y filtros */}
+            <SearchFilterContainer
+              {...searchFilterContainerProps}
+              clients={services}
+              showSearchFilter={true}
+            />
+          </div>
         </div>
-      </div>
+      )}
       {/* Contenedor de filter chips */}
       <SearchFilterContainer
         {...searchFilterContainerProps}
@@ -228,7 +233,7 @@ export const ServicesList = (servicesListProps) => {
               <b style={textShadow}>TOTAL SERVICIO:</b>
               {currencyFormat(service.total_price)}
             </div>
-            {editMode && (
+            {active === "true" && editMode && (
               <div className="servicesListActions">
                 <Link onClick={() => handleDeleteService(service.id)}>
                   <DeleteIcon
@@ -241,6 +246,20 @@ export const ServicesList = (servicesListProps) => {
                 </Link>
                 <Link to={`/services/serviceModification/${service.id}`}>
                   <EditIcon
+                    sx={{
+                      fontSize: "2em",
+                      margin: "5px",
+                      color: darkMode ? "white" : "#1976d2",
+                    }}
+                  />
+                </Link>
+              </div>
+            )}
+            {/* Modo inactivo */}
+            {active === "false" && (
+              <div className="servicesListActions">
+                <Link onClick={() => handleUndeleteService(service.id)}>
+                  <RestoreFromTrashIcon
                     sx={{
                       fontSize: "2em",
                       margin: "5px",

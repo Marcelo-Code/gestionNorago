@@ -17,8 +17,6 @@ import { ServiceCreationContainer } from "./pages/services/serviceCreation/Servi
 import { ServiceModificationContainer } from "./pages/services/serviceModification/ServiceModificationContainer";
 import { GeneralContext } from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
-import { InactiveClientsListContainer } from "./pages/clients/clientsList/InactiveClientsListContainer";
-import { InactiveServicesListContainer } from "./pages/services/servicesList/InactiveServicesListContainer";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
 import { PriceModificationContainer } from "./pages/prices/priceModification/PriceModificationContainer";
@@ -82,16 +80,12 @@ function AppContent() {
                   element={<ClientModificactionContainer />}
                 />
                 <Route
-                  path="/services/servicesList"
+                  path="/services/servicesList/active/:active"
                   element={<ServicesListContainer />}
                 />
                 <Route
                   path="/services/servicesList/:clientId"
                   element={<ServicesListContainer />}
-                />
-                <Route
-                  path="/services/inactiveServicesList"
-                  element={<InactiveServicesListContainer />}
                 />
                 <Route
                   path="/services/serviceCreation"
