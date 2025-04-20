@@ -1,6 +1,5 @@
 import { NavBarContainer } from "./layout/navBar/NavBarContainer";
 import "./index.css";
-import "./index.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,7 +14,10 @@ import { ClientModificactionContainer } from "./pages/clients/clientModification
 import { ServicesListContainer } from "./pages/services/servicesList/ServicesListContainer";
 import { ServiceCreationContainer } from "./pages/services/serviceCreation/ServiceCreationContainer";
 import { ServiceModificationContainer } from "./pages/services/serviceModification/ServiceModificationContainer";
-import { GeneralContext } from "./context/GeneralContext";
+import {
+  GeneralContext,
+  GeneralContextProvider,
+} from "./context/GeneralContext";
 import { useContext, useEffect } from "react";
 import { PricesListContainer } from "./pages/prices/pricesList/PricesListContainer";
 import { PriceCreationContainer } from "./pages/prices/priceCreation/PriceCreationContainer";
@@ -41,7 +43,9 @@ function App() {
 
   return (
     <Router>
-      <AppContent />
+      <GeneralContextProvider>
+        <AppContent />
+      </GeneralContextProvider>
     </Router>
   );
 }
