@@ -16,7 +16,7 @@ export const ServicesListContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [updateList, setUpdateList] = useState(false);
   const { darkMode } = useContext(GeneralContext);
-  const { clientId = null, active } = useParams();
+  const { clientId = null, active = "true" } = useParams();
 
   const [filteredClients, setFilteredClients] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);

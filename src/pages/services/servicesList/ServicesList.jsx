@@ -204,9 +204,16 @@ export const ServicesList = (servicesListProps) => {
               <b style={textShadow}>N° SERIE:</b>
               {service.serial_number}
             </div>
-            <div className="servicesText" style={{ marginBottom: "10px" }}>
+            <div
+              className="servicesText"
+              style={{
+                marginBottom: "10px",
+              }}
+            >
               <b style={textShadow}>SERVICIO: </b>
+              {/* <span style={{ maxWidth: "40%", wordWrap: "break-word" }}> */}
               {service.prices.service_name}
+              {/* </span> */}
             </div>
             <div className="servicesPrice" style={{ marginBottom: "10px" }}>
               <b style={textShadow}>PRECIO SERVICIO: </b>
